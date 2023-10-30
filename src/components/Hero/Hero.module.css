@@ -1,0 +1,29 @@
+.enterContainer {
+  display: flex;
+}
+
+
+
+.leftContainer {
+  width: 50vw;
+  height: 100dvh;
+  background-color: yellow;
+}
+
+.leftContainer footer {
+    background-color: red;
+    position: absolute;
+    bottom: 0;
+  }
+
+.leftContainer img {
+    object-fit: cover;
+  width: 50vw;
+  height: 100dvh;
+}
+
+.rightContainer {
+  width: 50vw;
+  height: 100dvh;
+  background-color: var(--gray-lighter);
+}
