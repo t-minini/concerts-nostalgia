@@ -8,7 +8,7 @@
   --gray-lighter: #d9d9d9;
   --gray-light: #afafaf;
   --gray-dark: #7e7e7e;
-  --orange: #cd7e36;
+  --orange: rgb(205, 126, 54);
 }
 
 html {

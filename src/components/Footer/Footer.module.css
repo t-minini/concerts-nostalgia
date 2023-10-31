@@ -1,0 +1,75 @@
+.footer {
+  height: 30rem;
+  width: 100vw;
+  display: flex;
+  justify-content: space-around;
+  padding: 0 8rem;
+}
+
+.title {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  justify-content: flex-start;
+}
+
+.title h1 {
+  font-size: 5rem;
+  color: var(--orange);
+  font-weight: var(--montserrat-semibold-600);
+  text-align: left;
+  width: fit-content;
+}
+
+.title h2 {
+  font-size: 2.4rem;
+  color: var(--font-dark);
+  font-weight: var(--montserrat-regular-400);
+  text-align: left;
+  padding-left: 7rem;
+  width: fit-content;
+}
+
+.links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8rem;
+  justify-content: flex-end;
+  width: 50%;
+}
+
+.links img {
+  position: relative;
+  top: 0.3rem;
+  right: 0.4rem;
+  height: 2.5rem;
+  /* width: 2.5rem; */
+}
+.links a {
+  color: var(--font-dark);
+  font-size: 2.4rem;
+  text-decoration: none;
+  /* background-color: red; */
+}
+
+.links a:hover {
+  color: var(--orange);
+  transition: 1s;
+  /* text-decoration: underline; */
+  /* text-decoration-color: var(--orange); */
+}
+
+.links a:visited {
+  /* color: var(--orange); */
+  /* text-decoration-color: var(--orange); */
+}
+
+.footer p {
+  display: unset;
+  position: absolute;
+  bottom: -29.5rem;
+  font-size: 1rem;
+  color: var(--gray-lighter);
+}
