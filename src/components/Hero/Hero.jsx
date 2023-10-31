@@ -1,5 +1,6 @@
 import style from './Hero.module.css';
 import heroImg from './../../assets/images/kelvin-moquete-image.jpg';
+import arrowDown from './../../assets/icons/arrow-down-wite.png';
 
 export function Hero() {
   return (
@@ -8,8 +9,13 @@ export function Hero() {
         <h1>concerts nostalgia</h1>
         <h2>my live concerts journey, revisited</h2>
       </div>
-      <div className={style.kelvin}>
-        photography by{' '}
+      <div className={style.arrowContainer}>
+        <div className={style.arrowDown}></div>
+        <div className={style.arrowDown}></div>
+        <div className={style.arrowDown}></div>
+      </div>
+      <div className={style.kelvinCopy}>
+        photography by
         <a
           href="https://unsplash.com/@kelmoquete"
           target="_blank"
