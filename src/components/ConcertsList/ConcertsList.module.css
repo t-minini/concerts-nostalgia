@@ -1,0 +1,15 @@
+.concertsList {
+  width: 100vw;
+  height: fit-content;
+  background-color: var(--gray-lighter);
+  padding: 8rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: center;
+  gap: 4rem;
+}
+
+.concertsList img {
+  height: 21rem;
+}
