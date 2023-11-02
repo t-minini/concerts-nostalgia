@@ -1,0 +1,22 @@
+.concertInfo {
+  width: 100vw;
+  height: 100dvh;
+  background-color: var(--font-dark);
+  opacity: 0.5;
+  z-index: 1;
+  position: absolute;
+  left: 0rem;
+  /* margin: auto; */
+  margin-top: -8rem;
+  /* visibility: hidden; */
+}
+
+.infoContainer {
+  width: 55rem;
+  height: 65rem;
+  background-color: red;
+  /* opacity: unset; */
+  margin: auto;
+  position: relative;
+  z-index: 2;
+}
