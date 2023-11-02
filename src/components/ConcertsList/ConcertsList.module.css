@@ -8,6 +8,7 @@
 
 .ticketsContainer {
   display: flex;
+  /* flex-direction: row; */
   flex-wrap: wrap;
   justify-content: space-between;
   align-content: center;
@@ -18,4 +19,3 @@
 .ticketsContainer img {
   height: 21rem;
 }
-

@@ -1,14 +1,16 @@
 .concertInfo {
   width: 100vw;
   height: 100dvh;
-  background-color: var(--font-dark);
-  opacity: 0.5;
+  /* background-color: var(--font-dark); */
+  /* opacity: 0.5; */
   z-index: 1;
   position: absolute;
   left: 0rem;
   /* margin: auto; */
   margin-top: -8rem;
+  /* padding: auto; */
   /* visibility: hidden; */
+  border: 50px solid rgb(37, 37, 37, 0.5);
 }
 
 .infoContainer {
@@ -17,6 +19,6 @@
   background-color: red;
   /* opacity: unset; */
   margin: auto;
-  position: relative;
+  /* position: absolute; */
   z-index: 2;
 }
