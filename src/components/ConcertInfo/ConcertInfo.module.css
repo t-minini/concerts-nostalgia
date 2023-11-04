@@ -1,24 +1,30 @@
-.concertInfo {
+/* .concertInfo {
   width: 100vw;
   height: 100dvh;
-  /* background-color: var(--font-dark); */
-  /* opacity: 0.5; */
+  background-color: var(--font-dark);
+  opacity: 0.5;
   z-index: 1;
   position: absolute;
   left: 0rem;
-  /* margin: auto; */
   margin-top: -8rem;
-  /* padding: auto; */
-  /* visibility: hidden; */
-  border: 50px solid rgb(37, 37, 37, 0.5);
+} */
+
+.concertInfo {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  margin-top: -8rem;
+  margin-left: -8rem;
+  background: var(--dark-opacity);
+  transition: opacity 500ms;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .infoContainer {
   width: 55rem;
   height: 65rem;
-  background-color: red;
-  /* opacity: unset; */
-  margin: auto;
-  /* position: absolute; */
-  z-index: 2;
+  background-color: var(--gray-light);
 }

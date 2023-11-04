@@ -8,11 +8,11 @@ export function ConcertsList() {
   return (
     <main id="tickets" className={style.concertsList}>
       <div className={style.ticketsContainer}>
+      <ConcertInfo className={style.concertInfo}/>
         <img src={halsey} alt="concert ticket" />
         <img src={coldplay} alt="concert ticket" />
         <img src={robyn} alt="concert ticket" />
       </div>
-      <ConcertInfo />
     </main>
   );
 }
