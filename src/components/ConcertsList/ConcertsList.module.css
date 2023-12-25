@@ -1,7 +1,7 @@
 .concertsList {
   width: 100vw;
   height: fit-content;
-  background-color: var(--gray-lighter);
+  /* background-color: var(--gray-lighter); */
   padding: 8rem;
   display: flex;
 }
