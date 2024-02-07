@@ -1,15 +1,27 @@
 :root {
-  --montserrat-regular-400: 400;
-  --montserrat-semibold-600: 600;
+  --light-300: 300;
+  --regular-400: 400;
+  --semibold-600: 600;
 
   --font-light: #ffffff;
   --font-dark: #252525;
 
-  --dark-opacity: rgb(37, 37, 37, 0.8);
-  --gray-lighter: #d9d9d9;
-  --gray-light: #afafaf;
-  --gray-dark: #7e7e7e;
+  /* --dark-opacity: rgb(37, 37, 37, 0.8); */
+  /* --gray-lighter: #d9d9d9; */
+  /* --gray-light: #afafaf; */
+  --gray-dark: #3e3e3e;
   --orange: rgb(205, 126, 54);
+
+  --content-width: 1160px;
+
+  --gradient: linear-gradient(
+    283deg,
+    rgba(227, 75, 240, 1) 0%,
+    rgba(123, 147, 232, 1) 16%,
+    rgba(170, 227, 156, 1) 44%,
+    rgba(254, 229, 8, 1) 68%,
+    rgba(251, 71, 71, 1) 95%
+  );
 }
 
 html {
