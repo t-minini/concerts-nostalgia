@@ -21,7 +21,7 @@
   text-align: center;
   color: transparent;
   background-clip: text;
-  font-weight: var(--semibold-600);
+  font-weight: var(--extraBold-800);
   background-image: var(--gradient);
 }
 
@@ -34,7 +34,7 @@
   font-weight: var(--light-300);
 }
 
-.kelvin__copyright {
+.photo__copyright {
   right: 1rem;
   bottom: 1rem;
   font-size: 1.5rem;
@@ -42,7 +42,7 @@
   color: var(--gray-dark);
 }
 
-.kelvin__copyright a {
+.photo__copyright a {
   left: 1rem;
   bottom: 1rem;
   font-size: 1.5rem;

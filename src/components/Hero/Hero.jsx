@@ -14,7 +14,7 @@ export function Hero() {
         <div className={style.arrowDown}></div>
         <div className={style.arrowDown}></div>
       </Link>
-      <div className={style.kelvin__copyright}>
+      <div className={style.photo__copyright}>
         photography by&nbsp;
         <a
           href="https://unsplash.com/@kelmoquete"
