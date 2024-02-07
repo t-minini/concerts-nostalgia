@@ -1,0 +1,95 @@
+.tickets {
+  width: 100vw;
+  height: fit-content;
+  background-color: var(--gray-lighter);
+  padding-top: 2rem;
+  padding-bottom: 8rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  /* background-color: yellowgreen; */
+}
+
+.tickets h2 {
+  font-size: 5rem;
+  /* background-color: red; */
+  width: var(--content-width);
+  line-height: 4.2rem;
+
+  /* margin-bottom: 3rem; */
+}
+
+.tickets hr {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  width: var(--content-width);
+  border: none;
+  height: 0.1rem;
+  background-color: var(--font-dark);
+}
+
+.tickets button {
+  width: 18rem;
+  height: 6rem;
+  margin: auto;
+  border-radius: 2.2rem;
+  background: var(--gradient);
+  border: none;
+  display: flex;
+  align-items: center;
+  /* text-align: center; */
+  justify-content: center;
+  margin-top: 3rem;
+  cursor: pointer;
+  /* transition: 0.5s; */
+}
+
+.tickets button:hover {
+  /* background: var(--font-dark); */
+  /* transition: 0.5s; */
+
+}
+
+.tickets button p {
+  font-size: 2.5rem;
+  background-color: var(--font-light);
+  height: 5.4rem;
+  width: 17.4rem;
+  border-radius: 1.9rem;
+  display: flex;
+  padding-bottom: 0.5rem;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  transition: ease-in 0.5s;
+}
+
+.tickets button p:hover {
+  background: var(--gradient);
+  /* transition: 0.5s; */
+  transition: ease-out 0.5s;
+ 
+  
+}
+
+.tickets_container {
+  width: var(--content-width);
+  display: flex;
+  /* flex-direction: row; */
+  flex-wrap: wrap;
+  justify-content: space-between;
+  /* align-content: center; */
+  /* margin: 8rem; */
+  /* gap: 4rem; */
+  row-gap: 3rem;
+  /* background-color: red; */
+}
+
+.tickets_container img {
+  height: 18.2rem;
+}
+
+/* .concertInfo {
+  position: relative;
+} */

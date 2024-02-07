@@ -28,7 +28,7 @@
 .text__container p {
   font-size: 3rem;
   text-align: right;
-  margin-right: 0.2rem;
+  margin-right: 0.4rem;
   color: var(--font-light);
   mix-blend-mode: difference;
   font-weight: var(--light-300);

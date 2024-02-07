@@ -1,13 +1,13 @@
 import style from './App.module.css';
-import { Hero } from './components/Hero/Hero';
+import { Hero } from './components/hero/Hero';
 import { Footer } from './components/Footer/Footer';
-import { ConcertsList } from './components/ConcertsList/ConcertsList';
+import { Tickets } from './components/tickets/Tickets';
 
 function App() {
   return (
     <div className={style.app}>
       <Hero />
-      <ConcertsList />
+      <Tickets />
       <Footer />
     </div>
   );
