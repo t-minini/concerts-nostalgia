@@ -3,7 +3,7 @@
   height: fit-content;
   background-color: var(--gray-lighter);
   padding-top: 2rem;
-  padding-bottom: 8rem;
+  /* padding-bottom: 8rem; */
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -22,7 +22,7 @@
 
 .tickets hr {
   margin-top: 3rem;
-  margin-bottom: 3rem;
+  /* margin-bottom: 3rem; */
   width: var(--content-width);
   border: none;
   height: 0.1rem;
