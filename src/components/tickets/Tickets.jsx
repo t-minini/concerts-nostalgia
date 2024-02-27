@@ -7,27 +7,75 @@ import coldplay from './../../assets/images/coldplay-ticket.png';
 export function Tickets() {
   return (
     <section id="tickets" className={style.tickets}>
-      <h2>concerts</h2>
-      <hr />
-      <div className={style.tickets_container}>
+      <h2 className={style.tickets__title}>concerts</h2>
+      <hr className={style['tickets__first-break']} />
+      <div className={style.tickets__container}>
         {/* <ConcertInfo className={style.concertInfo} /> */}
-        <img src={halsey} alt="concert ticket" />
-        <img src={coldplay} alt="concert ticket" />
-        <img src={robyn} alt="concert ticket" />
-        <img src={halsey} alt="concert ticket" />
-        <img src={coldplay} alt="concert ticket" />
-        <img src={robyn} alt="concert ticket" />
-        <img src={halsey} alt="concert ticket" />
-        <img src={coldplay} alt="concert ticket" />
-        <img src={robyn} alt="concert ticket" />
-        <img src={halsey} alt="concert ticket" />
-        <img src={coldplay} alt="concert ticket" />
-        <img src={robyn} alt="concert ticket" />
+        <img
+          className={style.tickets__image}
+          src={halsey}
+          alt="concert ticket"
+        />
+        <img
+          className={style.tickets__image}
+          src={coldplay}
+          alt="concert ticket"
+        />
+        <img
+          className={style.tickets__image}
+          src={robyn}
+          alt="concert ticket"
+        />
+        <img
+          className={style.tickets__image}
+          src={halsey}
+          alt="concert ticket"
+        />
+        <img
+          className={style.tickets__image}
+          src={coldplay}
+          alt="concert ticket"
+        />
+        <img
+          className={style.tickets__image}
+          src={robyn}
+          alt="concert ticket"
+        />
+        <img
+          className={style.tickets__image}
+          src={halsey}
+          alt="concert ticket"
+        />
+        <img
+          className={style.tickets__image}
+          src={coldplay}
+          alt="concert ticket"
+        />
+        <img
+          className={style.tickets__image}
+          src={robyn}
+          alt="concert ticket"
+        />
+        <img
+          className={style.tickets__image}
+          src={halsey}
+          alt="concert ticket"
+        />
+        <img
+          className={style.tickets__image}
+          src={coldplay}
+          alt="concert ticket"
+        />
+        <img
+          className={style.tickets__image}
+          src={robyn}
+          alt="concert ticket"
+        />
       </div>
-      <button>
-        <p>add new</p>
+      <button className={style.tickets__btn}>
+        <p className={style['tickets__btn-text']}>add new</p>
       </button>
-      <hr />
+      <hr className={style['tickets__second-break']} />
     </section>
   );
 }
