@@ -72,9 +72,14 @@ export function Tickets() {
           alt="concert ticket"
         />
       </div>
-      <button className={style.tickets__btn}>
+      {/* <button className={style.tickets__btn}>
         <p className={style['tickets__btn-text']}>add new</p>
-      </button>
+      </button> */}
+      {/* <div> */}
+        <a className={style.tickets__btn} href="UPDATE">
+          add new
+        </a>
+      {/* </div> */}
       <hr className={style['tickets__second-break']} />
     </section>
   );

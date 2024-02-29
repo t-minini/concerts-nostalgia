@@ -32,43 +32,6 @@
   background-color: var(--font-dark);
 }
 
-.tickets__btn {
-  width: 18rem;
-  height: 6rem;
-  margin: auto;
-  border: none;
-  display: flex;
-  cursor: pointer;
-  margin-top: 3rem;
-  align-items: center;
-  border-radius: 2rem;
-  justify-content: center;
-  background: var(--font-dark);
-  transition: background-color 0.5s ease;
-}
-
-.tickets__btn:hover {
-  background: var(--gradient);
-}
-
-.tickets__btn-text:hover {
-  background: var(--gradient);
-}
-
-.tickets__btn-text {
-  display: flex;
-  height: 5.4rem;
-  width: 17.4rem;
-  font-size: 2.5rem;
-  text-align: center;
-  align-items: center;
-  border-radius: 1.7rem;
-  padding-bottom: 0.5rem;
-  justify-content: center;
-  background-color: var(--font-light);
-  transition: background-color 0.5s ease;
-}
-
 .tickets__container {
   display: flex;
   row-gap: 3rem;
@@ -79,4 +42,48 @@
 
 .tickets__image {
   height: 18.2rem;
+}
+
+.tickets__btn {
+  width: 15rem;
+  display: flex;
+  height: 4.5rem;
+  margin-top: 3rem;
+  overflow: hidden;
+  font-size: 2.5rem;
+  position: relative;
+  align-items: center;
+  border-radius: 1rem;
+  text-decoration: none;
+  padding-bottom: 0.3rem;
+  justify-content: center;
+  color: var(--font-dark);
+  border-color: var(--font-dark);
+  background-color: var(--font-light);
+  &::before,
+  &::after {
+    top: 0;
+    left: 0;
+    content: '';
+    height: 100%;
+    position: absolute;
+    transform: translateX(-100px) skewX(-15deg);
+  }
+  &::after {
+    left: 3rem;
+    width: 3rem;
+    background: var(--font-light);
+  }
+  &:hover {
+    color: var(--font-dark);
+    background: var(--gradient);
+    &::before {
+      opacity: 1;
+    }
+    &::before,
+    &::after {
+      transition: all 0.9s ease;
+      transform: translateX(300px) skewX(-15deg);
+    }
+  }
 }
