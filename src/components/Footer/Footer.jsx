@@ -1,46 +1,49 @@
 import style from './Footer.module.css';
-// import linkIcon from './../../assets/icons/icons8-link-96.png';
 
 export function Footer() {
   return (
     <footer className={style.footer}>
-      <section className={style.footerInfo}>
-        <div className={style.title}>
-          <h1>concerts nostalgia</h1>
-          <h2>my live concerts journey, revisited</h2>
+      <div className={style.footer__container}>
+        <div className={style['footer__title-container']}>
+          <h2 className={style.footer__title}>concerts nostalgia</h2>
+          <p className={style.footer__text}>
+            my live concerts journey, revisited
+          </p>
         </div>
-        <div className={style.links}>
+        <div className={style['footer__links-container']}>
           <a
-            href="https://www.linkedin.com/in/tulio-minini/"
-            target={'_blank'}
             rel="noreferrer"
             title="linkedin"
+            target={'_blank'}
+            className={style.footer__link}
+            href="https://www.linkedin.com/in/tulio-minini/"
           >
             linkedIn
-            {/* <img src={linkIcon} alt="" /> */}
           </a>
           <a
-            href="https://github.com/t-minini"
-            target={'_blank'}
-            rel="noreferrer"
             title="github"
+            rel="noreferrer"
+            target={'_blank'}
+            className={style.footer__link}
+            href="https://github.com/t-minini"
           >
             github
-            {/* <img src={linkIcon} alt="" /> */}
           </a>
           <a
-            href="mailto:tulio.mminini@gmail.com"
-            target={'_blank'}
             rel="noreferrer"
+            target={'_blank'}
             title="Send me an e-mail"
+            className={style.footer__link}
+            href="mailto:tulio.mminini@gmail.com"
           >
             email
-            {/* <img src={linkIcon} alt="" /> */}
           </a>
         </div>
-      </section>
-      <div className={style.copyright}>
-        <p>&copy; 2023 Created, designed and built by Tulio Minini</p>
+      </div>
+      <div className={style['footer__copyright-container']}>
+        <p className={style['footer__copyright-text']}>
+          &copy; 2024 Designed and built by Tulio Minini 
+        </p>
       </div>
     </footer>
   );

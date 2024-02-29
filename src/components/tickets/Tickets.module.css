@@ -56,25 +56,25 @@
 }
 
 .tickets__btn-text {
-  font-size: 2.5rem;
-  background-color: var(--font-light);
+  display: flex;
   height: 5.4rem;
   width: 17.4rem;
-  border-radius: 1.7rem;
-  display: flex;
-  padding-bottom: 0.5rem;
-  align-items: center;
+  font-size: 2.5rem;
   text-align: center;
+  align-items: center;
+  border-radius: 1.7rem;
+  padding-bottom: 0.5rem;
   justify-content: center;
+  background-color: var(--font-light);
   transition: background-color 0.5s ease;
 }
 
 .tickets__container {
-  width: var(--content-width);
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
   row-gap: 3rem;
+  flex-wrap: wrap;
+  width: var(--content-width);
+  justify-content: space-between;
 }
 
 .tickets__image {
