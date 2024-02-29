@@ -55,19 +55,15 @@
 }
 
 /* animated arrow */
-
 .hero__arrow-container {
   width: 5rem;
   height: 7rem;
   bottom: 0rem;
   display: flex;
+  cursor: pointer;
   position: absolute;
   align-items: center;
   justify-content: center;
-}
-
-.hero__arrow:hover {
-  cursor: pointer;
 }
 
 .hero__arrow-down {
