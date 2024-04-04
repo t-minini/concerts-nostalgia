@@ -6,12 +6,13 @@
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  background-color: var(--gray-lighter);
+  background-color: var(--font-dark);
 }
 
 .tickets__title {
   font-size: 5rem;
   line-height: 4.2rem;
+  color: var(--font-light);
   width: var(--content-width);
 }
 
@@ -21,7 +22,7 @@
   margin-top: 3rem;
   margin-bottom: 3rem;
   width: var(--content-width);
-  background-color: var(--font-dark);
+  background-color: var(--font-light);
 }
 
 .tickets__second-break {
