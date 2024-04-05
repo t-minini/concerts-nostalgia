@@ -43,6 +43,14 @@
 
 .tickets__image {
   height: 18.2rem;
+  position: relative;
+  border-radius: 4px;
+  transition: 0.5s ease;
+}
+
+.tickets__image:hover {
+  cursor: pointer;
+  transform: scale(1.04);
 }
 
 .tickets__btn {
