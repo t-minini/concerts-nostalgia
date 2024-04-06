@@ -5,11 +5,11 @@
   --extraBold-800: 800;
 
   --font-light: #ffffff;
-  --font-dark: #212121;
+  --black: #212121;
 
   /* --dark-opacity: rgb(37, 37, 37, 0.8); */
   /* --gray-lighter: #d9d9d9; */
-  /* --gray-light: #afafaf; */
+  --gray-light: #afafaf;
   --gray-dark: #3e3e3e;
   --orange: rgb(205, 126, 54);
 
@@ -30,6 +30,7 @@ html {
   width: 100%;
   /* background-color: red; */
   cursor: default;
+
 }
 
 *,

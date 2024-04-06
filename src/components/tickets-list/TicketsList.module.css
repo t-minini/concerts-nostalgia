@@ -6,7 +6,7 @@
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  background-color: var(--font-dark);
+  background-color: var(--black);
 }
 
 .tickets__title {
@@ -16,7 +16,7 @@
   width: var(--content-width);
 }
 
-.tickets__first-break {
+.tickets__break {
   border: none;
   height: 0.1rem;
   margin-top: 3rem;
@@ -30,27 +30,82 @@
   height: 0.1rem;
   margin-top: 3rem;
   width: var(--content-width);
-  background-color: var(--font-dark);
+  background-color: var(--black);
 }
 
 .tickets__container {
   display: flex;
   row-gap: 3rem;
   flex-wrap: wrap;
-  width: var(--content-width);
-  justify-content: space-between;
-}
-
-.tickets__image {
   height: 18.2rem;
+  max-width: 56rem;
   position: relative;
   border-radius: 4px;
   transition: 0.5s ease;
+  background-size: cover;
+  width: var(--content-width);
+  justify-content: space-between;
+  background-image: url('./../../assets/images/ticket.png');
 }
 
-.tickets__image:hover {
+.tickets__container:hover {
   cursor: pointer;
   transform: scale(1.04);
+}
+
+.tickets__container-info {
+  width: 79%;
+  height: 100%;
+  padding-top: 1rem;
+  padding-left: 5rem;
+  padding-bottom: 1rem;
+}
+
+.tickets__container-tour {
+  font-weight: 700;
+  font-size: 3.2rem;
+  font-style: normal;
+  text-transform: uppercase;
+  font-family: 'Antonio', sans-serif;
+}
+
+.tickets__container-artist {
+  font-weight: 200;
+  font-size: 2.5rem;
+  font-style: normal;
+  text-transform: uppercase;
+  font-family: 'Antonio', sans-serif;
+}
+
+.tickets__container-rate {
+  font-size: 2.2rem;
+  padding-right: 2rem;
+}
+
+.tickets__container-venue {
+  padding-top: 0.5rem;
+}
+
+.tickets__container-city-country {
+  display: flex;
+}
+
+.tickets__container-venue,
+.tickets__container-city,
+.tickets__container-country {
+  font-weight: 200;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-family: 'Public Sans', sans-serif;
+}
+
+.tickets__container-date {
+  font-weight: 900;
+  font-size: 1.5rem;
+  font-style: normal;
+  padding-top: 0.5rem;
+  text-transform: uppercase;
+  font-family: 'Public Sans', sans-serif;
 }
 
 .tickets__btn {
@@ -63,11 +118,11 @@
   position: relative;
   align-items: center;
   border-radius: 1rem;
+  color: var(--black);
   text-decoration: none;
   padding-bottom: 0.3rem;
   justify-content: center;
-  color: var(--font-dark);
-  border-color: var(--font-dark);
+  border-color: var(--black);
   background-color: var(--font-light);
   &::before,
   &::after {
@@ -84,7 +139,7 @@
     background: var(--font-light);
   }
   &:hover {
-    color: var(--font-dark);
+    color: var(--black);
     background: var(--gradient);
     &::before {
       opacity: 1;

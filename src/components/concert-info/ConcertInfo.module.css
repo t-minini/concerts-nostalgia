@@ -3,21 +3,27 @@
   height: 100%;
   overflow: hidden;
   position: absolute;
-  margin-top: -8rem;
-  margin-left: -8rem;
+  left: 0;
+  /* top: 0; */
+  /* margin-top: -8rem; */
+  /* margin-right: 8rem; */
   background: var(--dark-opacity);
+  /* background-color: red; */
   backdrop-filter: blur(0.3rem);
   transition: opacity 500ms;
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 10;
 }
 
 .infoContainer {
   width: 55rem;
   height: 65rem;
-  background-color: var(--gray-light);
+  background-color: var(--black);
   padding: 3rem 5rem;
+  /* background-color: red; */
+  color: var(--font-light);
 }
 
 .topContainer p {
