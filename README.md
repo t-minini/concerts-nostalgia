@@ -1,4 +1,4 @@
-# Concerts Nostalgia. My live concerts journey, revisited
+# Concerts Nostalgia. My live concerts journey, revisited.
 
 Revised version of my previous web application called "[Concerts Database](https://concert-database.netlify.app/)", originally developed in 2022.
 
