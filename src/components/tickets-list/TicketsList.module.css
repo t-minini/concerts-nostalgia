@@ -25,6 +25,15 @@
   background-color: var(--font-light);
 }
 
+.tickets__wrapper {
+  display: grid;
+  row-gap: 3rem;
+  justify-items: center;
+  grid-template-rows: auto;
+  width: var(--content-width);
+  grid-template-columns: repeat(2, 1fr);
+}
+
 .tickets__second-break {
   border: none;
   height: 0.1rem;
@@ -33,7 +42,7 @@
   background-color: var(--black);
 }
 
-.tickets__container {
+.ticket__container {
   display: flex;
   row-gap: 3rem;
   flex-wrap: wrap;
@@ -45,15 +54,35 @@
   background-size: cover;
   width: var(--content-width);
   justify-content: space-between;
-  background-image: url('./../../assets/images/ticket.png');
+  background-image: url('./../../assets/images/ticket-1.png');
 }
 
-.tickets__container:hover {
+.background-one {
+
+}
+
+.background-two {
+
+}
+
+.background-three {
+
+}
+
+.background-four {
+
+}
+
+.background-five {
+
+}
+
+.ticket__container:hover {
   cursor: pointer;
   transform: scale(1.04);
 }
 
-.tickets__container-info {
+.ticket__container-info {
   width: 79%;
   height: 100%;
   padding-top: 1rem;
@@ -61,45 +90,46 @@
   padding-bottom: 1rem;
 }
 
-.tickets__container-tour {
+.ticket__container-tour {
   font-weight: 700;
-  font-size: 3.2rem;
+  font-size: 3rem;
   font-style: normal;
   text-transform: uppercase;
   font-family: 'Antonio', sans-serif;
+  /* background-color: red; */
 }
 
-.tickets__container-artist {
+.ticket__container-artist {
   font-weight: 200;
-  font-size: 2.5rem;
+  font-size: 2.4rem;
   font-style: normal;
   text-transform: uppercase;
   font-family: 'Antonio', sans-serif;
 }
 
-.tickets__container-rate {
+.ticket__container-rate {
   font-size: 2.2rem;
   padding-right: 2rem;
 }
 
-.tickets__container-venue {
+.ticket__container-venue {
   padding-top: 0.5rem;
 }
 
-.tickets__container-city-country {
+.ticket__container-city-country {
   display: flex;
 }
 
-.tickets__container-venue,
-.tickets__container-city,
-.tickets__container-country {
+.ticket__container-venue,
+.ticket__container-city,
+.ticket__container-country {
   font-weight: 200;
   font-size: 1.2rem;
   font-style: normal;
   font-family: 'Public Sans', sans-serif;
 }
 
-.tickets__container-date {
+.ticket__container-date {
   font-weight: 900;
   font-size: 1.5rem;
   font-style: normal;
