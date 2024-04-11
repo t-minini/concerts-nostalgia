@@ -58,23 +58,23 @@
 }
 
 .background-one {
-
+  background-image: url('./../../assets/images/ticket-1.png');
 }
 
 .background-two {
-
+  background-image: url('./../../assets/images/ticket-2.png');
 }
 
 .background-three {
-
+  background-image: url('./../../assets/images/ticket-3.png');
 }
 
 .background-four {
-
+  background-image: url('./../../assets/images/ticket-4.png');
 }
 
 .background-five {
-
+  background-image: url('./../../assets/images/ticket-5.png');
 }
 
 .ticket__container:hover {
