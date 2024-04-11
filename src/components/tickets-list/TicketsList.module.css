@@ -82,37 +82,43 @@
 }
 
 .ticket__container-info {
-  width: 79%;
+  width: 80%;
   height: 100%;
-  padding-top: 1rem;
-  padding-left: 5rem;
+  padding-top: 1.2rem;
+  padding-left: 4.6rem;
   padding-bottom: 1rem;
 }
 
 .ticket__container-tour {
-  font-weight: 700;
   font-size: 3rem;
+  font-weight: 700;
   font-style: normal;
   text-transform: uppercase;
   font-family: 'Antonio', sans-serif;
-  /* background-color: red; */
 }
 
 .ticket__container-artist {
   font-weight: 200;
-  font-size: 2.4rem;
+  font-size: 2.3rem;
   font-style: normal;
+  padding-bottom: 0.3rem;
   text-transform: uppercase;
   font-family: 'Antonio', sans-serif;
 }
 
 .ticket__container-rate {
   font-size: 2.2rem;
-  padding-right: 2rem;
+  padding-right: 0.5rem;
+}
+
+.empty-star {
+  font-size: 2.2rem;
+  padding-right: 0.5rem;
+  color: rgb(178, 178, 178);
 }
 
 .ticket__container-venue {
-  padding-top: 0.5rem;
+  padding-top: 0.3rem;
 }
 
 .ticket__container-city-country {

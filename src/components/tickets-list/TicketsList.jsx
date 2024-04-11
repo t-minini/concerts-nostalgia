@@ -28,6 +28,27 @@ export function TicketsList() {
     fetchConcerts();
   }, []);
 
+  const Rating = ({ rating }) => {
+    const filledStars = Array.from({ length: rating }, (_, ratingIndex) => (
+      <span key={ratingIndex} className={style['ticket__container-rate']}>
+        &#11088;
+      </span>
+    ));
+
+    const emptyStars = Array.from({ length: 5 - rating }, (_, ratingIndex) => (
+      <span key={ratingIndex + rating} className={style['empty-star']}>
+        &#9734;
+      </span>
+    ));
+
+    return (
+      <>
+        {filledStars}
+        {emptyStars}
+      </>
+    );
+  };
+
   return (
     <section id="tickets" className={style.tickets}>
       <h2 className={style.tickets__title}>concerts</h2>
@@ -48,9 +69,7 @@ export function TicketsList() {
                 <p className={style['ticket__container-artist']}>
                   {currentConcert.artist}
                 </p>
-                <p className={style['ticket__container-rate']}>
-                  &#11088;&nbsp;&nbsp;&#11088;&nbsp;&nbsp;&#11088;&nbsp;&nbsp;&#11088;&nbsp;&nbsp;&#11088;
-                </p>
+                <Rating rating={currentConcert.rating} />
                 <p className={style['ticket__container-venue']}>
                   {currentConcert.location}
                 </p>
