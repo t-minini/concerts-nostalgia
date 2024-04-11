@@ -12,6 +12,7 @@ export function TicketsList() {
       city: '',
       country: '',
       rating: 0,
+      background: '',
     },
   ]);
 
@@ -34,7 +35,12 @@ export function TicketsList() {
       <div className={style.tickets__wrapper}>
         {concerts.map((currentConcert) => {
           return (
-            <div className={style.ticket__container}>
+            <div
+              className={`${style.ticket__container} ${
+                style[currentConcert.background]
+              }`}
+              key={currentConcert.tour}
+            >
               <div className={style['ticket__container-info']}>
                 <p className={style['ticket__container-tour']}>
                   {currentConcert.tour}

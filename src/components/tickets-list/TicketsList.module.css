@@ -54,7 +54,6 @@
   background-size: cover;
   width: var(--content-width);
   justify-content: space-between;
-  background-image: url('./../../assets/images/ticket-1.png');
 }
 
 .background-one {
