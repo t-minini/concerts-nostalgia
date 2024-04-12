@@ -1,6 +1,7 @@
 import style from './TicketsList.module.css';
 import { useState, useEffect } from 'react';
 import { api } from '../../api/concerts-nostalgia-api';
+import { AddConcert } from '../add-concert/AddConcert';
 
 export function TicketsList() {
   const [concerts, setConcerts] = useState([
@@ -90,9 +91,9 @@ export function TicketsList() {
         })}
       </div>
 
-      <a className={style.tickets__btn} href="/">
-        add new
-      </a>
+      <span>
+        <AddConcert />
+      </span>
     </section>
   );
 }
