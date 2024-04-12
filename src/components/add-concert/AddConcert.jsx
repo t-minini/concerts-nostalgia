@@ -1,10 +1,11 @@
 // import style from './AddNewConcert.module.css';
 
 import React, { useState } from 'react';
-import { Modal, Form, Input, Select } from 'antd';
+import { Modal, Form, Input, Select, Upload } from 'antd';
 import { Row, Col, Flex } from 'antd';
 import { api } from '../../api/concerts-nostalgia-api';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { InboxOutlined } from '@ant-design/icons';
 
 export function AddConcert() {
   const navigate = useNavigate();
@@ -12,10 +13,10 @@ export function AddConcert() {
   const [confirmLoading, setConfirmLoading] = useState(false);
 
   const [form] = Form.useForm();
-  const [formLayout, setFormLayout] = useState('vertical');
-  const onFormLayoutChange = ({ layout }) => {
-    setFormLayout(layout);
-  };
+  // const [formLayout, setFormLayout] = useState('vertical');
+  // const onFormLayoutChange = ({ layout }) => {
+  //   setFormLayout(layout);
+  // };
 
   const [modalAdd, setModalAdd] = useState({
     tour: '',
@@ -53,24 +54,24 @@ export function AddConcert() {
     setOpen(false);
   };
 
-  const formItemLayout = {
-    labelCol: {
-      xs: {
-        span: 20,
-      },
-      sm: {
-        span: 20,
-      },
-    },
-    wrapperCol: {
-      xs: {
-        span: 50,
-      },
-      sm: {
-        span: 80,
-      },
-    },
-  };
+  // const formItemLayout = {
+  //   labelCol: {
+  //     xs: {
+  //       span: 20,
+  //     },
+  //     sm: {
+  //       span: 20,
+  //     },
+  //   },
+  //   wrapperCol: {
+  //     xs: {
+  //       span: 50,
+  //     },
+  //     sm: {
+  //       span: 80,
+  //     },
+  //   },
+  // };
 
   const onThemeChange = (value) => {
     // switch (value) {
@@ -105,13 +106,14 @@ export function AddConcert() {
         onCancel={handleCancel}
       >
         <Form
-          {...formItemLayout}
-          layout={formLayout}
+          // {...formItemLayout}
+          // layout={formLayout}
           form={form}
+          layout="vertical"
           // initialValues={{
-          //   layout: formLayout,
+          //   ,
           // }}
-          onValuesChange={onFormLayoutChange}
+          // onValuesChange={onFormLayoutChange}
           // style={{
           //   maxWidth: 600,
           // }}
@@ -126,14 +128,14 @@ export function AddConcert() {
                 <Form.Item label="tour/concert">
                   <Input placeholder="enter tour" />
                 </Form.Item>
-                <Form.Item label="artist">
-                  <Input placeholder="enter artist" />
-                </Form.Item>
-                <Form.Item label="year">
-                  <Input placeholder="enter year" />
-                </Form.Item>
                 <Form.Item label="location">
                   <Input placeholder="enter location" />
+                </Form.Item>
+                <Form.Item label="country">
+                  <Input placeholder="enter country" />
+                </Form.Item>
+                <Form.Item label="rating">
+                  <Input placeholder="choose rate" />
                 </Form.Item>
               </Col>
             </Row>
@@ -143,46 +145,60 @@ export function AddConcert() {
               }}
             >
               <Col span={24}>
+                <Form.Item label="artist">
+                  <Input placeholder="enter artist" />
+                </Form.Item>
+                <Form.Item label="year">
+                  <Input placeholder="enter year" />
+                </Form.Item>
                 <Form.Item label="city">
                   <Input placeholder="enter city" />
                 </Form.Item>
-                <Form.Item label="country">
-                  <Input placeholder="enter country" />
-                </Form.Item>
-                <Form.Item label="rating">
-                  <Input placeholder="choose rate" />
-                </Form.Item>
-                <Form.Item label="ticket style">
+                <Form.Item name="style" label="ticket style">
                   <Select
                     placeholder="choose a ticket style"
                     onChange={onThemeChange}
-                    options={[
-                      {
-                        value: 'background-one',
-                        label: 'Style One',
-                      },
-                      {
-                        value: 'background-two',
-                        label: 'Style Two',
-                      },
-                      {
-                        value: 'background-three',
-                        label: 'Style Three',
-                      },
-                      {
-                        value: 'background-four',
-                        label: 'Style Four',
-                      },
-                      {
-                        value: 'background-five',
-                        label: 'Style Five',
-                      },
-                    ]}
-                  ></Select>
+                  >
+                    <Select.Option value="background-one">
+                      Style One
+                    </Select.Option>
+                    <Select.Option value="background-two">
+                      Style Two
+                    </Select.Option>
+                    <Select.Option value="background-three">
+                      Style Three
+                    </Select.Option>
+                    <Select.Option value="background-four">
+                      Style Four
+                    </Select.Option>
+                    <Select.Option value="background-five">
+                      Style Five
+                    </Select.Option>
+                  </Select>
                 </Form.Item>
               </Col>
             </Row>
           </Flex>
+          <Form.Item label="images">
+            <Form.Item
+              name="dragger"
+              valuePropName="fileList"
+              // getValueFromEvent={normFile}
+              noStyle
+            >
+              <Upload.Dragger name="files" action="/upload.do">
+                <p className="ant-upload-drag-icon">
+                  <InboxOutlined />
+                </p>
+                <p className="ant-upload-text">
+                  Click or drag file to this area to upload
+                </p>
+                <p className="ant-upload-hint">
+                  Support for a single or bulk upload.
+                </p>
+              </Upload.Dragger>
+            </Form.Item>
+          </Form.Item>
         </Form>
       </Modal>
     </>
