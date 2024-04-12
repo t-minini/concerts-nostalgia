@@ -30,6 +30,7 @@ html {
   width: 100%;
   /* background-color: red; */
   cursor: default;
+  font-size: 62.5%;
 
 }
 
@@ -39,7 +40,7 @@ html {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-size: 62.5%; /* base font size to 10px, to facilitate using REM unit */
+   /* base font size to 10px, to facilitate using REM unit */
   font-family: 'Plus Jakarta Sans', sans-serif;
 }
 

@@ -90,7 +90,6 @@ export function TicketsList() {
           );
         })}
       </div>
-
       <span>
         <AddConcert />
       </span>

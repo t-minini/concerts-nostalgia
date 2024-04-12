@@ -1,11 +1,10 @@
 // import style from './AddNewConcert.module.css';
 
 import React, { useState } from 'react';
-import { Modal, Form, Input, Select, Upload } from 'antd';
-import { Row, Col, Flex } from 'antd';
+import { Row, Col, Flex, Modal, Form, Input, Select, Upload } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
 import { api } from '../../api/concerts-nostalgia-api';
 import { useNavigate } from 'react-router-dom';
-import { InboxOutlined } from '@ant-design/icons';
 
 export function AddConcert() {
   const navigate = useNavigate();
@@ -13,15 +12,15 @@ export function AddConcert() {
   const [confirmLoading, setConfirmLoading] = useState(false);
 
   const [form] = Form.useForm();
-  // const [formLayout, setFormLayout] = useState('vertical');
-  // const onFormLayoutChange = ({ layout }) => {
-  //   setFormLayout(layout);
-  // };
+  const [formLayout, setFormLayout] = useState('vertical');
+  const onFormLayoutChange = ({ layout }) => {
+    setFormLayout(layout);
+  };
 
-  const [modalAdd, setModalAdd] = useState({
+  const [concert, setConcert] = useState({
     tour: '',
     artist: '',
-    year: 0,
+    year: '',
     location: '',
     city: '',
     country: '',
@@ -33,20 +32,20 @@ export function AddConcert() {
   const showModal = () => {
     setOpen(true);
   };
+
   async function handleSubmit(event) {
-    // setModalAdd('The modal will be closed after two seconds');
     event.preventDefault();
+    try {
+      await api.post('/concerts/add', concert);
+      navigate('/home');
+    } catch (error) {
+      console.log(error);
+    }
     setConfirmLoading(true);
     setTimeout(() => {
       setOpen(false);
       setConfirmLoading(false);
     }, 2000);
-    try {
-      await api.post('/concerts/add', modalAdd);
-      navigate('/home');
-    } catch (error) {
-      console.log(error);
-    }
   }
 
   const handleCancel = () => {
@@ -54,44 +53,44 @@ export function AddConcert() {
     setOpen(false);
   };
 
-  // const formItemLayout = {
-  //   labelCol: {
-  //     xs: {
-  //       span: 20,
-  //     },
-  //     sm: {
-  //       span: 20,
-  //     },
-  //   },
-  //   wrapperCol: {
-  //     xs: {
-  //       span: 50,
-  //     },
-  //     sm: {
-  //       span: 80,
-  //     },
-  //   },
-  // };
+  const formItemLayout = {
+    labelCol: {
+      xs: {
+        span: 20,
+      },
+      sm: {
+        span: 20,
+      },
+    },
+    wrapperCol: {
+      xs: {
+        span: 50,
+      },
+      sm: {
+        span: 80,
+      },
+    },
+  };
 
   const onThemeChange = (value) => {
-    // switch (value) {
-    //   case 'male':
-    //     form.setFieldsValue({
-    //       note: 'Hi, man!',
-    //     });
-    //     break;
-    //   case 'female':
-    //     form.setFieldsValue({
-    //       note: 'Hi, lady!',
-    //     });
-    //     break;
-    //   case 'other':
-    //     form.setFieldsValue({
-    //       note: 'Hi there!',
-    //     });
-    //     break;
-    //   default:
-    // }
+    switch (value) {
+      case 'male':
+        form.setFieldsValue({
+          note: 'Hi, man!',
+        });
+        break;
+      case 'female':
+        form.setFieldsValue({
+          note: 'Hi, lady!',
+        });
+        break;
+      case 'other':
+        form.setFieldsValue({
+          note: 'Hi there!',
+        });
+        break;
+      default:
+    }
   };
 
   return (
@@ -106,14 +105,13 @@ export function AddConcert() {
         onCancel={handleCancel}
       >
         <Form
-          // {...formItemLayout}
-          // layout={formLayout}
+          {...formItemLayout}
+          layout={formLayout}
           form={form}
-          layout="vertical"
           // initialValues={{
-          //   ,
+          //   layout: formLayout,
           // }}
-          // onValuesChange={onFormLayoutChange}
+          onValuesChange={onFormLayoutChange}
           // style={{
           //   maxWidth: 600,
           // }}
@@ -126,16 +124,25 @@ export function AddConcert() {
             >
               <Col span={24}>
                 <Form.Item label="tour/concert">
-                  <Input placeholder="enter tour" />
+                  <Input placeholder="enter tour" value={concert.tour} />
                 </Form.Item>
                 <Form.Item label="location">
-                  <Input placeholder="enter location" />
+                  <Input
+                    placeholder="enter location"
+                    value={concert.location}
+                  />
                 </Form.Item>
                 <Form.Item label="country">
-                  <Input placeholder="enter country" />
+                  <Input placeholder="enter country" value={concert.country} />
                 </Form.Item>
                 <Form.Item label="rating">
-                  <Input placeholder="choose rate" />
+                  <Select placeholder="choose a rate" onChange={onThemeChange}>
+                    <Select.Option value={concert.rating[0]}>1</Select.Option>
+                    <Select.Option value={concert.rating[1]}>2</Select.Option>
+                    <Select.Option value={concert.rating[2]}>3</Select.Option>
+                    <Select.Option value={concert.rating[3]}>4</Select.Option>
+                    <Select.Option value={concert.rating[4]}>5</Select.Option>
+                  </Select>
                 </Form.Item>
               </Col>
             </Row>
@@ -146,32 +153,32 @@ export function AddConcert() {
             >
               <Col span={24}>
                 <Form.Item label="artist">
-                  <Input placeholder="enter artist" />
+                  <Input placeholder="enter artist" value={concert.artist} />
                 </Form.Item>
                 <Form.Item label="year">
-                  <Input placeholder="enter year" />
+                  <Input placeholder="enter year" value={concert.year} />
                 </Form.Item>
                 <Form.Item label="city">
-                  <Input placeholder="enter city" />
+                  <Input placeholder="enter city" value={concert.city} />
                 </Form.Item>
-                <Form.Item name="style" label="ticket style">
+                <Form.Item label="ticket style">
                   <Select
                     placeholder="choose a ticket style"
                     onChange={onThemeChange}
                   >
-                    <Select.Option value="background-one">
+                    <Select.Option value={concert.background[0]}>
                       Style One
                     </Select.Option>
-                    <Select.Option value="background-two">
+                    <Select.Option value={concert.background[1]}>
                       Style Two
                     </Select.Option>
-                    <Select.Option value="background-three">
+                    <Select.Option value={concert.background[2]}>
                       Style Three
                     </Select.Option>
-                    <Select.Option value="background-four">
+                    <Select.Option value={concert.background[3]}>
                       Style Four
                     </Select.Option>
-                    <Select.Option value="background-five">
+                    <Select.Option value={concert.background[4]}>
                       Style Five
                     </Select.Option>
                   </Select>
@@ -186,15 +193,15 @@ export function AddConcert() {
               // getValueFromEvent={normFile}
               noStyle
             >
-              <Upload.Dragger name="files" action="/upload.do">
+              <Upload.Dragger name="files" action="/upload.do" disabled>
                 <p className="ant-upload-drag-icon">
-                  <InboxOutlined />
+                  <UploadOutlined style={{ fontSize: '40px' }} />
                 </p>
                 <p className="ant-upload-text">
-                  Click or drag file to this area to upload
+                  Click or drag image to this area to upload
                 </p>
                 <p className="ant-upload-hint">
-                  Support for a single or bulk upload.
+                  Support for a single or bulk upload
                 </p>
               </Upload.Dragger>
             </Form.Item>
