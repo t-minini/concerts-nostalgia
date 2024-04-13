@@ -1,5 +1,3 @@
-// import style from './AddNewConcert.module.css';
-
 import React, { useState } from 'react';
 import {
   Row,
@@ -15,23 +13,18 @@ import {
 } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { api } from '../../api/concerts-nostalgia-api';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 export function AddConcert() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const [rate, setRate] = useState();
   const [confirmLoading, setConfirmLoading] = useState(false);
-
-  const [form] = Form.useForm();
-  const [formLayout, setFormLayout] = useState('vertical');
-  const onFormLayoutChange = ({ layout }) => {
-    setFormLayout(layout);
-  };
 
   const [concert, setConcert] = useState({
     tour: '',
     artist: '',
-    year: '',
+    year: 0,
     location: '',
     city: '',
     country: '',
@@ -39,30 +32,6 @@ export function AddConcert() {
     rating: 0,
     background: '',
   });
-
-  const showModal = () => {
-    setOpen(true);
-  };
-
-  async function handleSubmit(event) {
-    event.preventDefault();
-    try {
-      await api.post('/concerts/add', concert);
-      navigate('/home');
-    } catch (error) {
-      console.log(error);
-    }
-    setConfirmLoading(true);
-    setTimeout(() => {
-      setOpen(false);
-      setConfirmLoading(false);
-    }, 2000);
-  }
-
-  const handleCancel = () => {
-    console.log('Clicked cancel button');
-    setOpen(false);
-  };
 
   const formItemLayout = {
     labelCol: {
@@ -83,26 +52,53 @@ export function AddConcert() {
     },
   };
 
-  const onThemeChange = (value) => {
-    switch (value) {
-      case 'male':
-        form.setFieldsValue({
-          note: 'Hi, man!',
-        });
-        break;
-      case 'female':
-        form.setFieldsValue({
-          note: 'Hi, lady!',
-        });
-        break;
-      case 'other':
-        form.setFieldsValue({
-          note: 'Hi there!',
-        });
-        break;
-      default:
-    }
+  const showModal = () => {
+    setOpen(true);
   };
+
+  function handleChange(event) {
+    setConcert({ ...concert, [event.target.name]: event.target.value });
+  }
+
+  function handleRating(event, newValue) {
+    setRate(newValue);
+    setConcert({ ...concert, [event.target.name]: event.target.value });
+  }
+
+  const handleCancel = () => {
+    setOpen(false);
+    setConcert({
+      tour: '',
+      artist: '',
+      year: 0,
+      location: '',
+      city: '',
+      country: '',
+      rating: 0,
+      background: '',
+    });
+  };
+
+  async function handleSubmit(event) {
+    setConfirmLoading(true);
+    setTimeout(() => {
+      setOpen(false);
+      setConfirmLoading(false);
+    }, 2000);
+
+    event.preventDefault();
+    try {
+      await api.post('/concerts/add', concert );
+      // navigate('/home');
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const onDateChange = (date, dateString) => {
+    console.log(date, dateString);
+  };
+
 
   return (
     <>
@@ -154,12 +150,12 @@ export function AddConcert() {
         >
           <Form
             {...formItemLayout}
-            layout={formLayout}
-            form={form}
+            layout={'vertical'}
+            // form={form}
             // initialValues={{
             //   layout: formLayout,
             // }}
-            onValuesChange={onFormLayoutChange}
+            // onValuesChange={onFormLayoutChange}
             style={{
               backgroundColor: '#212121',
             }}
@@ -176,36 +172,49 @@ export function AddConcert() {
                       <label style={{ color: '#ffffff' }}>tour / concert</label>
                     }
                   >
-                    <Input placeholder="enter tour" value={concert.tour} />
+                    <Input
+                      name="tour"
+                      placeholder="enter tour"
+                      value={concert.tour}
+                      onChange={handleChange}
+                    />
                   </Form.Item>
                   <Form.Item
                     label={<label style={{ color: '#ffffff' }}>location</label>}
                   >
                     <Input
+                      name="location"
                       placeholder="enter location"
                       value={concert.location}
+                      onChange={handleChange}
                     />
                   </Form.Item>
                   <Form.Item
                     label={<label style={{ color: '#ffffff' }}>country</label>}
                   >
                     <Input
+                      name="country"
                       placeholder="enter country"
                       value={concert.country}
+                      onChange={handleChange}
                     />
                   </Form.Item>
                   <Form.Item
                     label={<label style={{ color: '#ffffff' }}>rating</label>}
+                    // onChange={handleChange}
+                    onChange={handleRating}
+                    value={rate}
                   >
                     <Select
                       placeholder="choose a rate"
-                      onChange={onThemeChange}
+                      // onChange={onThemeChange}
+                      name="rating"
                     >
-                      <Select.Option value={concert.rating[0]}>1</Select.Option>
-                      <Select.Option value={concert.rating[1]}>2</Select.Option>
-                      <Select.Option value={concert.rating[2]}>3</Select.Option>
-                      <Select.Option value={concert.rating[3]}>4</Select.Option>
-                      <Select.Option value={concert.rating[4]}>5</Select.Option>
+                      <Select.Option value={1}>1</Select.Option>
+                      <Select.Option value={2}>2</Select.Option>
+                      <Select.Option value={3}>3</Select.Option>
+                      <Select.Option value={4}>4</Select.Option>
+                      <Select.Option value={5}>5</Select.Option>
                     </Select>
                   </Form.Item>
                 </Col>
@@ -219,47 +228,64 @@ export function AddConcert() {
                   <Form.Item
                     label={<label style={{ color: '#ffffff' }}>artist</label>}
                   >
-                    <Input placeholder="enter artist" value={concert.artist} />
+                    <Input
+                      name="artist"
+                      placeholder="enter artist"
+                      value={concert.artist}
+                      onChange={handleChange}
+                    />
                   </Form.Item>
                   <Form.Item
                     label={<label style={{ color: '#ffffff' }}>year</label>}
                   >
                     <DatePicker
+                      name="year"
+                      type="text"
                       placeholder="enter year"
-                      value={concert.year}
+                      // value={concert.year}
                       picker="year"
                       style={{
                         width: 240,
                       }}
+                      onChange={onDateChange}
                     />
                   </Form.Item>
                   <Form.Item
                     label={<label style={{ color: '#ffffff' }}>city</label>}
                   >
-                    <Input placeholder="enter city" value={concert.city} />
+                    <Input
+                      name="city"
+                      placeholder="enter city"
+                      value={concert.city}
+                      onChange={handleChange}
+                    />
                   </Form.Item>
                   <Form.Item
                     label={
                       <label style={{ color: '#ffffff' }}>ticket style</label>
                     }
+                    onChange={handleChange}
                   >
                     <Select
                       placeholder="choose ticket style"
-                      onChange={onThemeChange}
+                      // onChange={onThemeChange}
+                      name="background"
+                      // type="text"
+                      // value={concert.background}
                     >
-                      <Select.Option value={concert.background[0]}>
+                      <Select.Option value="background-one">
                         Style One
                       </Select.Option>
-                      <Select.Option value={concert.background[1]}>
+                      <Select.Option value="background-two">
                         Style Two
                       </Select.Option>
-                      <Select.Option value={concert.background[2]}>
+                      <Select.Option value="background-three">
                         Style Three
                       </Select.Option>
-                      <Select.Option value={concert.background[3]}>
+                      <Select.Option value="background-four">
                         Style Four
                       </Select.Option>
-                      <Select.Option value={concert.background[4]}>
+                      <Select.Option value="background-five">
                         Style Five
                       </Select.Option>
                     </Select>
