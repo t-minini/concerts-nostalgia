@@ -2,6 +2,8 @@ import style from './TicketsList.module.css';
 import { useState, useEffect } from 'react';
 import { api } from '../../api/concerts-nostalgia-api';
 import { AddConcert } from '../add-concert/AddConcert';
+import { ConcertInfo } from '../concert-info/ConcertInfo';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 
 export function TicketsList() {
   const [concerts, setConcerts] = useState([
@@ -63,6 +65,10 @@ export function TicketsList() {
               }`}
               key={currentConcert.tour}
             >
+              <Link to={`/edit/${currentConcert._id}`}>
+                <ConcertInfo />
+              </Link>
+
               <div className={style['ticket__container-info']}>
                 <p className={style['ticket__container-tour']}>
                   {currentConcert.tour}
