@@ -1,6 +1,7 @@
 import style from './TicketsList.module.css';
 import { useState, useEffect } from 'react';
 import { api } from '../../api/concerts-nostalgia-api';
+// import { AddPage } from '../../pages/AddPage';
 import { AddConcert } from '../add-concert/AddConcert';
 import { ConcertInfo } from '../concert-info/ConcertInfo';
 import { Link, useParams, useNavigate } from 'react-router-dom';
@@ -65,10 +66,9 @@ export function TicketsList() {
               }`}
               key={currentConcert.tour}
             >
-              <Link to={`/edit/${currentConcert._id}`}>
-                <ConcertInfo />
-              </Link>
-
+              {/* <Link to={`/edit/${currentConcert._id}`}>
+                <ConcertInfo id={currentConcert._id} />
+              </Link> */}
               <div className={style['ticket__container-info']}>
                 <p className={style['ticket__container-tour']}>
                   {currentConcert.tour}

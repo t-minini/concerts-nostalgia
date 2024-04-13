@@ -128,7 +128,7 @@ export function ConcertInfo() {
   };
   return (
     <>
-      <button onClick={showModal}>Add New</button>
+      <button onClick={showModal}>Edit</button>
       <ConfigProvider
         theme={{
           components: {

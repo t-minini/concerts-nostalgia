@@ -29,8 +29,8 @@ export function AddConcert() {
     city: '',
     country: '',
     companion: [],
-    rating: 0,
-    background: '',
+    rating: 1,
+    background: 'background-one',
   });
 
   const formItemLayout = {
@@ -88,7 +88,7 @@ export function AddConcert() {
 
     event.preventDefault();
     try {
-      await api.post('/concerts/add', concert );
+      await api.post('/concerts/add', concert);
       // navigate('/home');
     } catch (error) {
       console.log(error);
@@ -98,7 +98,6 @@ export function AddConcert() {
   const onDateChange = (date, dateString) => {
     console.log(date, dateString);
   };
-
 
   return (
     <>
