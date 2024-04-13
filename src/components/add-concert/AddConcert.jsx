@@ -13,13 +13,12 @@ import {
 } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { api } from '../../api/concerts-nostalgia-api';
-// import { useNavigate } from 'react-router-dom';
+import { message } from 'antd';
 
 export function AddConcert() {
   // const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [rate, setRate] = useState();
-  const [confirmLoading, setConfirmLoading] = useState(false);
 
   const [concert, setConcert] = useState({
     tour: '',
@@ -80,24 +79,21 @@ export function AddConcert() {
   };
 
   async function handleSubmit(event) {
-    setConfirmLoading(true);
-    setTimeout(() => {
-      setOpen(false);
-      setConfirmLoading(false);
-    }, 2000);
-
     event.preventDefault();
     try {
-      await api.post('/concerts/add', concert);
-      // navigate('/home');
-    } catch (error) {
-      console.log(error);
-    }
-  }
+      const response = await api.post('/concerts/add', concert);
 
-  const onDateChange = (date, dateString) => {
-    console.log(date, dateString);
-  };
+      // const response = await api.get('/concerts');
+      // const updatedConcerts = response.data;
+
+      console.log(response);
+      message.success('Concert created successfully');
+    } catch (error) {
+      console.log('Error creating concert:', error);
+      message.error('Failed to create concert');
+    }
+    setOpen(false);
+  }
 
   return (
     <>
@@ -143,7 +139,6 @@ export function AddConcert() {
           open={open}
           onOk={handleSubmit}
           okText="Create"
-          confirmLoading={confirmLoading}
           onCancel={handleCancel}
           centered
         >
@@ -199,15 +194,21 @@ export function AddConcert() {
                     />
                   </Form.Item>
                   <Form.Item
+                    name="rating"
                     label={<label style={{ color: '#ffffff' }}>rating</label>}
                     // onChange={handleChange}
                     onChange={handleRating}
-                    value={rate}
+                    // value={rate}
+                    value={concert.rating}
                   >
                     <Select
                       placeholder="choose a rate"
                       // onChange={onThemeChange}
                       name="rating"
+                      value={concert.rating}
+                      onChange={(value) =>
+                        setConcert({ ...concert, rating: parseInt(value, 10) })
+                      }
                     >
                       <Select.Option value={1}>1</Select.Option>
                       <Select.Option value={2}>2</Select.Option>
@@ -239,14 +240,16 @@ export function AddConcert() {
                   >
                     <DatePicker
                       name="year"
-                      type="text"
                       placeholder="enter year"
                       // value={concert.year}
                       picker="year"
                       style={{
                         width: 240,
                       }}
-                      onChange={onDateChange}
+                      onChange={(date, dateString) => {
+                        const year = date ? date.year() : 0;
+                        setConcert({ ...concert, year });
+                      }}
                     />
                   </Form.Item>
                   <Form.Item
@@ -270,7 +273,10 @@ export function AddConcert() {
                       // onChange={onThemeChange}
                       name="background"
                       // type="text"
-                      // value={concert.background}
+                      value={concert.background}
+                      onChange={(value) =>
+                        setConcert({ ...concert, background: value })
+                      }
                     >
                       <Select.Option value="background-one">
                         Style One

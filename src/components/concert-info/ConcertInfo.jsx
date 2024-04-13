@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { api } from '../../api/concerts-nostalgia-api';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import {
   Row,
   Col,
@@ -90,14 +90,14 @@ export function ConcertInfo() {
     }
   }
 
-  async function handleDelete() {
-    try {
-      await api.delete(`/concerts/delete/${id}`);
-      navigate('/home');
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  // async function handleDelete() {
+  //   try {
+  //     await api.delete(`/concerts/delete/${id}`);
+  //     navigate('/home');
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
   function handleRating(event, newValue) {
     setRate(newValue);
