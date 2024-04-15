@@ -126,7 +126,8 @@ export function AddConcert() {
             Modal: {
               contentBg: '#212121',
               headerBg: '#212121',
-              titleFontSize: '30px',
+              titleFontSize: '40px',
+              titleLineHeight: '1.2',
               colorIcon: '#ffffff',
               titleColor: '#ffffff',
               colorIconHover: '#e34bf0',
@@ -160,6 +161,7 @@ export function AddConcert() {
         <Modal
           title="add new concert"
           width="550px"
+          closeIcon={null}
           open={open}
           onOk={handleSubmit}
           okText="Create"
@@ -243,7 +245,7 @@ export function AddConcert() {
               >
                 <Col span={24}>
                   <Form.Item
-                    label={<label style={{ color: '#ffffff' }}>artist</label>}
+                    label={<label style={{ color: '#ffffff' }}>artist / band</label>}
                   >
                     <Input
                       name="artist"
@@ -294,19 +296,19 @@ export function AddConcert() {
                       }
                     >
                       <Select.Option value="background-one">
-                        Style One
+                        style one
                       </Select.Option>
                       <Select.Option value="background-two">
-                        Style Two
+                        style two
                       </Select.Option>
                       <Select.Option value="background-three">
-                        Style Three
+                        style three
                       </Select.Option>
                       <Select.Option value="background-four">
-                        Style Four
+                        style four
                       </Select.Option>
                       <Select.Option value="background-five">
-                        Style Five
+                        style five
                       </Select.Option>
                     </Select>
                   </Form.Item>

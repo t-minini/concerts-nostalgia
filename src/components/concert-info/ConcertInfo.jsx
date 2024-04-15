@@ -123,7 +123,8 @@ export function ConcertInfo(currentConcert) {
             Modal: {
               contentBg: '#212121',
               headerBg: '#212121',
-              titleFontSize: '30px',
+              titleFontSize: '40px',
+              titleLineHeight: '1.2',
               colorIcon: '#ffffff',
               titleColor: '#ffffff',
               colorIconHover: '#e34bf0',
@@ -131,10 +132,12 @@ export function ConcertInfo(currentConcert) {
             Input: {
               activeBorderColor: '#e34bf0',
               hoverBorderColor: '#e34bf0',
+              colorBgContainerDisabled: '#ffffff',
             },
             Select: {
               colorPrimaryHover: '#e34bf0',
               colorPrimary: '#e34bf0',
+              colorBgContainerDisabled: '#ffffff',
             },
             DatePicker: {
               colorPrimaryHover: '#e34bf0',
@@ -144,17 +147,20 @@ export function ConcertInfo(currentConcert) {
               colorPrimary: '#ffffff', // background Create Button
               primaryColor: '#212121', // font color Create Button
               colorPrimaryHover: '#e34bf0', //background hover Create Button
-              defaultHoverBg: '#e34bf0', // background hover Cancel Button
-              defaultColor: '#212121', // font color Cancel Button
-              defaultHoverColor: '#ffffff', // font color hover Cancel Button
-              defaultBorderColor: '#ffffff', // border Cancel Button
+              defaultHoverBg: '#212121', // background hover Cancel Button
+              defaultColor: '#ffffff', // font color Cancel Button
+              defaultHoverColor: '#e34bf0', // font color hover Cancel Button
+              defaultBorderColor: '#212121', // border Cancel Button
+              defaultHoverBorderColor: '#212121',
+              defaultBg: '#212121',
             },
           },
         }}
       >
         <Modal
-          title="add new concert"
+          title="concert details"
           width="550px"
+          closeIcon={null}
           open={open}
           onOk={handleSubmit}
           okText="Save"
@@ -193,6 +199,7 @@ export function ConcertInfo(currentConcert) {
                       placeholder="enter tour"
                       value={currentConcert.concerts.tour}
                       onChange={handleChange}
+                      disabled
                     />
                   </Form.Item>
                   <Form.Item
@@ -203,6 +210,7 @@ export function ConcertInfo(currentConcert) {
                       placeholder="enter location"
                       value={currentConcert.concerts.location}
                       onChange={handleChange}
+                      disabled
                     />
                   </Form.Item>
                   <Form.Item
@@ -213,11 +221,11 @@ export function ConcertInfo(currentConcert) {
                       placeholder="enter country"
                       value={currentConcert.concerts.country}
                       onChange={handleChange}
+                      disabled
                     />
                   </Form.Item>
                   <Form.Item
                     label={<label style={{ color: '#ffffff' }}>rating</label>}
-                    // onChange={handleChange}
                     onChange={handleRating}
                   >
                     <Select
@@ -225,6 +233,7 @@ export function ConcertInfo(currentConcert) {
                       // onChange={onThemeChange}
                       name="rating"
                       value={currentConcert.concerts.rating}
+                      disabled
                     >
                       <Select.Option value={1}>1</Select.Option>
                       <Select.Option value={2}>2</Select.Option>
@@ -249,6 +258,7 @@ export function ConcertInfo(currentConcert) {
                       placeholder="enter artist"
                       value={currentConcert.concerts.artist}
                       onChange={handleChange}
+                      disabled
                     />
                   </Form.Item>
                   <Form.Item
@@ -259,6 +269,7 @@ export function ConcertInfo(currentConcert) {
                       placeholder="enter year"
                       value={currentConcert.concerts.year}
                       onChange={handleChange}
+                      disabled
                     />
                   </Form.Item>
                   <Form.Item
@@ -269,6 +280,7 @@ export function ConcertInfo(currentConcert) {
                       placeholder="enter city"
                       value={currentConcert.concerts.city}
                       onChange={handleChange}
+                      disabled
                     />
                   </Form.Item>
                   <Form.Item
@@ -283,21 +295,22 @@ export function ConcertInfo(currentConcert) {
                       name="background"
                       // type="text"
                       value={currentConcert.concerts.background}
+                      disabled
                     >
                       <Select.Option value="background-one">
-                        Style One
+                        style one
                       </Select.Option>
                       <Select.Option value="background-two">
-                        Style Two
+                        style two
                       </Select.Option>
                       <Select.Option value="background-three">
-                        Style Three
+                        style three
                       </Select.Option>
                       <Select.Option value="background-four">
-                        Style Four
+                        style four
                       </Select.Option>
                       <Select.Option value="background-five">
-                        Style Five
+                        style five
                       </Select.Option>
                     </Select>
                   </Form.Item>
