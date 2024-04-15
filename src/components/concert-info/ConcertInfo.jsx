@@ -113,7 +113,10 @@ export function ConcertInfo(currentConcert) {
   };
   return (
     <>
-      <button onClick={showModal}>Edit</button>
+      <span
+        style={{ position: 'absolute', width: '100%', height: '100%' }}
+        onClick={showModal}
+      ></span>
       <ConfigProvider
         theme={{
           components: {
