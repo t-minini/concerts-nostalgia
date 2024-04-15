@@ -10,12 +10,12 @@ import {
   Input,
   Select,
   Upload,
+  message,
   DatePicker,
   ConfigProvider,
 } from 'antd';
 import { UploadOutlined, PlusOutlined } from '@ant-design/icons';
 import { api } from '../../api/concerts-nostalgia-api';
-import { message } from 'antd';
 
 export function AddConcert() {
   // const navigate = useNavigate();
@@ -84,9 +84,6 @@ export function AddConcert() {
     event.preventDefault();
     try {
       const response = await api.post('/concerts/add', concert);
-
-      // const response = await api.get('/concerts');
-      // const updatedConcerts = response.data;
 
       console.log(response);
       setConcert(response.data);
@@ -173,10 +170,6 @@ export function AddConcert() {
             {...formItemLayout}
             layout={'vertical'}
             // form={form}
-            // initialValues={{
-            //   layout: formLayout,
-            // }}
-            // onValuesChange={onFormLayoutChange}
             style={{
               backgroundColor: '#212121',
             }}
@@ -223,14 +216,11 @@ export function AddConcert() {
                   <Form.Item
                     name="rating"
                     label={<label style={{ color: '#ffffff' }}>rating</label>}
-                    // onChange={handleChange}
                     onChange={handleRating}
-                    // value={rate}
                     value={concert.rating}
                   >
                     <Select
                       placeholder="choose a rate"
-                      // onChange={onThemeChange}
                       name="rating"
                       value={concert.rating}
                       onChange={(value) =>
@@ -297,9 +287,7 @@ export function AddConcert() {
                   >
                     <Select
                       placeholder="choose ticket style"
-                      // onChange={onThemeChange}
                       name="background"
-                      // type="text"
                       value={concert.background}
                       onChange={(value) =>
                         setConcert({ ...concert, background: value })
@@ -328,12 +316,7 @@ export function AddConcert() {
             <Form.Item
               label={<label style={{ color: '#ffffff' }}>images</label>}
             >
-              <Form.Item
-                name="dragger"
-                valuePropName="fileList"
-                // getValueFromEvent={normFile}
-                noStyle
-              >
+              <Form.Item name="dragger" valuePropName="fileList" noStyle>
                 <Upload.Dragger name="files" action="/upload.do" disabled>
                   <p className="ant-upload-drag-icon">
                     <UploadOutlined

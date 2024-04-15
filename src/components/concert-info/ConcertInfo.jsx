@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { api } from '../../api/concerts-nostalgia-api';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   Row,
   Col,
@@ -10,18 +10,15 @@ import {
   Input,
   Select,
   Upload,
-  DatePicker,
   ConfigProvider,
 } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 
-export function ConcertInfo() {
+export function ConcertInfo(currentConcert) {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [rate, setRate] = useState();
   const [confirmLoading, setConfirmLoading] = useState(false);
-
-  const { id } = useParams();
 
   const showModal = () => {
     setOpen(true);
@@ -34,39 +31,27 @@ export function ConcertInfo() {
     location: '',
     city: '',
     country: '',
-    rating: 0,
-    background: '',
+    rating: 1,
+    background: 'background-one',
   });
+
+  // useEffect(() => {
+  //   async function fetchConcerts() {
+  //     try {
+  //       const response = await api.get(`/concerts/${currentConcert.concert._id}`);
+  //       setConcert(response.data);
+  //       console.log(response);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+
+  //   fetchConcerts(currentConcert.concert._id);
+  // }, [currentConcert.concert._id]);
 
   const handleCancel = () => {
     setOpen(false);
-
-    setConcert({
-      tour: '',
-      artist: '',
-      year: 0,
-      location: '',
-      city: '',
-      country: '',
-      rating: 0,
-      background: '',
-    });
-    navigate('/');
   };
-
-  useEffect(() => {
-    async function fetchConcerts() {
-      try {
-        const response = await api.get(`/concerts/${id}`);
-        setConcert(response.data);
-        console.log(response);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-
-    fetchConcerts(id);
-  }, [id]);
 
   function handleChange(event) {
     setConcert({ ...concert, [event.target.name]: event.target.value });
@@ -83,7 +68,7 @@ export function ConcertInfo() {
       const clone = { ...concert };
 
       delete clone._id;
-      await api.put(`/concerts/edit/${id}`, clone);
+      await api.put(`/concerts/edit/${currentConcert.concert.id}`, clone);
       // navigate('/home');
     } catch (error) {
       console.log(error);
@@ -104,9 +89,9 @@ export function ConcertInfo() {
     setConcert({ ...concert, [event.target.name]: event.target.value });
   }
 
-  const onDateChange = (date, dateString) => {
-    console.log(date, dateString);
-  };
+  // const onDateChange = (date, dateString) => {
+  //   console.log(date, dateString);
+  // };
 
   const formItemLayout = {
     labelCol: {
@@ -186,6 +171,7 @@ export function ConcertInfo() {
             style={{
               backgroundColor: '#212121',
             }}
+            onSubmit={handleSubmit}
           >
             <Flex gap="middle" justify="space-between">
               <Row
@@ -202,7 +188,7 @@ export function ConcertInfo() {
                     <Input
                       name="tour"
                       placeholder="enter tour"
-                      value={concert.tour}
+                      value={currentConcert.concerts.tour}
                       onChange={handleChange}
                     />
                   </Form.Item>
@@ -212,7 +198,7 @@ export function ConcertInfo() {
                     <Input
                       name="location"
                       placeholder="enter location"
-                      value={concert.location}
+                      value={currentConcert.concerts.location}
                       onChange={handleChange}
                     />
                   </Form.Item>
@@ -222,7 +208,7 @@ export function ConcertInfo() {
                     <Input
                       name="country"
                       placeholder="enter country"
-                      value={concert.country}
+                      value={currentConcert.concerts.country}
                       onChange={handleChange}
                     />
                   </Form.Item>
@@ -230,12 +216,12 @@ export function ConcertInfo() {
                     label={<label style={{ color: '#ffffff' }}>rating</label>}
                     // onChange={handleChange}
                     onChange={handleRating}
-                    value={rate}
                   >
                     <Select
                       placeholder="choose a rate"
                       // onChange={onThemeChange}
                       name="rating"
+                      value={currentConcert.concerts.rating}
                     >
                       <Select.Option value={1}>1</Select.Option>
                       <Select.Option value={2}>2</Select.Option>
@@ -258,23 +244,18 @@ export function ConcertInfo() {
                     <Input
                       name="artist"
                       placeholder="enter artist"
-                      value={concert.artist}
+                      value={currentConcert.concerts.artist}
                       onChange={handleChange}
                     />
                   </Form.Item>
                   <Form.Item
-                    label={<label style={{ color: '#ffffff' }}>year</label>}
+                    label={<label style={{ color: '#ffffff' }}>city</label>}
                   >
-                    <DatePicker
+                    <Input
                       name="year"
-                      type="text"
                       placeholder="enter year"
-                      // value={concert.year}
-                      picker="year"
-                      style={{
-                        width: 240,
-                      }}
-                      onChange={onDateChange}
+                      value={currentConcert.concerts.year}
+                      onChange={handleChange}
                     />
                   </Form.Item>
                   <Form.Item
@@ -283,7 +264,7 @@ export function ConcertInfo() {
                     <Input
                       name="city"
                       placeholder="enter city"
-                      value={concert.city}
+                      value={currentConcert.concerts.city}
                       onChange={handleChange}
                     />
                   </Form.Item>
@@ -298,7 +279,7 @@ export function ConcertInfo() {
                       // onChange={onThemeChange}
                       name="background"
                       // type="text"
-                      // value={concert.background}
+                      value={currentConcert.concerts.background}
                     >
                       <Select.Option value="background-one">
                         Style One
