@@ -9,11 +9,18 @@
   background-color: var(--black);
 }
 
+.ticket__title-container {
+  display: flex;
+  align-items: center;
+  width: var(--content-width);
+  justify-content: space-between;
+
+}
+
 .tickets__title {
   font-size: 5rem;
-  line-height: 4.2rem;
+  line-height: 4rem;
   color: var(--font-light);
-  width: var(--content-width);
 }
 
 .tickets__break {
@@ -29,6 +36,7 @@
   display: grid;
   row-gap: 3rem;
   justify-items: center;
+  margin-bottom: 3rem;
   grid-template-rows: auto;
   width: var(--content-width);
   grid-template-columns: repeat(2, 1fr);

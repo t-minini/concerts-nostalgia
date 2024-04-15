@@ -4,6 +4,8 @@ import {
   Col,
   Flex,
   Modal,
+  Button,
+  Tooltip,
   Form,
   Input,
   Select,
@@ -11,7 +13,7 @@ import {
   DatePicker,
   ConfigProvider,
 } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
+import { UploadOutlined, PlusOutlined } from '@ant-design/icons';
 import { api } from '../../api/concerts-nostalgia-api';
 import { message } from 'antd';
 
@@ -87,17 +89,40 @@ export function AddConcert() {
       // const updatedConcerts = response.data;
 
       console.log(response);
-      message.success('Concert created successfully');
+      setConcert(response.data);
+      message.success('Concert created successfully!');
     } catch (error) {
       console.log('Error creating concert:', error);
-      message.error('Failed to create concert');
+      message.error('Failed to create concert!');
     }
     setOpen(false);
   }
 
   return (
     <>
-      <button onClick={showModal}>Add New</button>
+      <ConfigProvider
+        theme={{
+          components: {
+            Button: {
+              defaultColor: '#212121', // font color Cancel Button
+              defaultHoverColor: '#e34bf0', // font color hover Cancel Button
+              defaultBorderColor: '#ffffff', // border Cancel Button
+              defaultHoverBorderColor: '#e34bf0',
+              defaultBg: '#ffffff',
+              defaultHoverBg: '#212121', // background hover Cancel Button
+            },
+          },
+        }}
+      >
+        <Tooltip title="New Concert">
+          <Button
+            onClick={showModal}
+            shape="circle"
+            icon={<PlusOutlined />}
+            size="large"
+          />
+        </Tooltip>
+      </ConfigProvider>
       <ConfigProvider
         theme={{
           components: {
@@ -125,10 +150,12 @@ export function AddConcert() {
               colorPrimary: '#ffffff', // background Create Button
               primaryColor: '#212121', // font color Create Button
               colorPrimaryHover: '#e34bf0', //background hover Create Button
-              defaultHoverBg: '#e34bf0', // background hover Cancel Button
-              defaultColor: '#212121', // font color Cancel Button
-              defaultHoverColor: '#ffffff', // font color hover Cancel Button
-              defaultBorderColor: '#ffffff', // border Cancel Button
+              defaultHoverBg: '#212121', // background hover Cancel Button
+              defaultColor: '#ffffff', // font color Cancel Button
+              defaultHoverColor: '#e34bf0', // font color hover Cancel Button
+              defaultBorderColor: '#212121', // border Cancel Button
+              defaultHoverBorderColor: '#212121',
+              defaultBg: '#212121',
             },
           },
         }}

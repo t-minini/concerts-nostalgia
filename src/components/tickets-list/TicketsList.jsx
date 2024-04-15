@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { api } from '../../api/concerts-nostalgia-api';
 import { AddConcert } from '../add-concert/AddConcert';
 
-
 export function TicketsList() {
   const [concerts, setConcerts] = useState([
     {
@@ -53,7 +52,10 @@ export function TicketsList() {
 
   return (
     <section id="tickets" className={style.tickets}>
-      <h2 className={style.tickets__title}>concerts</h2>
+      <div className={style['ticket__title-container']}>
+        <h2 className={style.tickets__title}>concerts</h2>
+        <AddConcert />
+      </div>
       <hr className={style['tickets__break']} />
       <div className={style.tickets__wrapper}>
         {concerts.map((currentConcert) => {
@@ -62,7 +64,7 @@ export function TicketsList() {
               className={`${style.ticket__container} ${
                 style[currentConcert.background]
               }`}
-              key={currentConcert.tour}
+              key={`${currentConcert._id}concerts`}
             >
               {/* <Link to={`/edit/${currentConcert._id}`}>
                 <ConcertInfo id={currentConcert._id} />
@@ -94,9 +96,6 @@ export function TicketsList() {
           );
         })}
       </div>
-      <span>
-        <AddConcert />
-      </span>
     </section>
   );
 }
