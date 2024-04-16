@@ -11,14 +11,17 @@ import {
   Select,
   Upload,
   ConfigProvider,
+  Button,
 } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 
-export function ConcertInfo(currentConcert) {
+export function ConcertDetails(currentConcert) {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const [editMode, setEditMode] = useState(false);
   const [rate, setRate] = useState();
   const [confirmLoading, setConfirmLoading] = useState(false);
+  // console.log(currentConcert.concerts._id);
 
   const showModal = () => {
     setOpen(true);
@@ -35,26 +38,33 @@ export function ConcertInfo(currentConcert) {
     background: 'background-one',
   });
 
-  // useEffect(() => {
-  //   async function fetchConcerts() {
-  //     try {
-  //       const response = await api.get(`/concerts/${currentConcert.concert._id}`);
-  //       setConcert(response.data);
-  //       console.log(response);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
+  useEffect(() => {
+    async function fetchConcerts() {
+      try {
+        const response = await api.get(
+          `/concerts/${currentConcert.concerts._id}`
+        );
+        setConcert(response.data);
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
+    }
 
-  //   fetchConcerts(currentConcert.concert._id);
-  // }, [currentConcert.concert._id]);
+    fetchConcerts(currentConcert.concerts._id);
+  }, [currentConcert.concerts._id]);
 
   const handleCancel = () => {
     setOpen(false);
+    setEditMode(false);
   };
 
   function handleChange(event) {
     setConcert({ ...concert, [event.target.name]: event.target.value });
+  }
+
+  function handleEdit() {
+    setEditMode(true);
   }
 
   async function handleSubmit(event) {
@@ -68,21 +78,21 @@ export function ConcertInfo(currentConcert) {
       const clone = { ...concert };
 
       delete clone._id;
-      await api.put(`/concerts/edit/${currentConcert.concert.id}`, clone);
+      await api.put(`/concerts/edit/${currentConcert.concerts._id}`, clone);
       // navigate('/home');
     } catch (error) {
       console.log(error);
     }
   }
 
-  // async function handleDelete() {
-  //   try {
-  //     await api.delete(`/concerts/delete/${id}`);
-  //     navigate('/home');
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
+  async function handleDelete() {
+    try {
+      await api.delete(`/concerts/delete/${currentConcert.concerts._id}`);
+    } catch (error) {
+      console.log(error);
+    }
+    setOpen(false);
+  }
 
   function handleRating(event, newValue) {
     setRate(newValue);
@@ -168,6 +178,14 @@ export function ConcertInfo(currentConcert) {
           confirmLoading={confirmLoading}
           onCancel={handleCancel}
           centered
+          footer={[
+            <Button key="back" onClick={handleCancel}>
+              Cancel
+            </Button>,
+            <Button key="submit" type="primary" onClick={handleEdit}>
+              Edit
+            </Button>,
+          ]}
         >
           <Form
             {...formItemLayout}
@@ -199,7 +217,7 @@ export function ConcertInfo(currentConcert) {
                       placeholder="enter tour"
                       value={currentConcert.concerts.tour}
                       onChange={handleChange}
-                      disabled
+                      disabled={!editMode}
                     />
                   </Form.Item>
                   <Form.Item
@@ -210,7 +228,7 @@ export function ConcertInfo(currentConcert) {
                       placeholder="enter location"
                       value={currentConcert.concerts.location}
                       onChange={handleChange}
-                      disabled
+                      disabled={!editMode}
                     />
                   </Form.Item>
                   <Form.Item
@@ -221,7 +239,7 @@ export function ConcertInfo(currentConcert) {
                       placeholder="enter country"
                       value={currentConcert.concerts.country}
                       onChange={handleChange}
-                      disabled
+                      disabled={!editMode}
                     />
                   </Form.Item>
                   <Form.Item
@@ -233,7 +251,7 @@ export function ConcertInfo(currentConcert) {
                       // onChange={onThemeChange}
                       name="rating"
                       value={currentConcert.concerts.rating}
-                      disabled
+                      disabled={!editMode}
                     >
                       <Select.Option value={1}>1</Select.Option>
                       <Select.Option value={2}>2</Select.Option>
@@ -258,7 +276,7 @@ export function ConcertInfo(currentConcert) {
                       placeholder="enter artist"
                       value={currentConcert.concerts.artist}
                       onChange={handleChange}
-                      disabled
+                      disabled={!editMode}
                     />
                   </Form.Item>
                   <Form.Item
@@ -269,7 +287,7 @@ export function ConcertInfo(currentConcert) {
                       placeholder="enter year"
                       value={currentConcert.concerts.year}
                       onChange={handleChange}
-                      disabled
+                      disabled={!editMode}
                     />
                   </Form.Item>
                   <Form.Item
@@ -280,7 +298,7 @@ export function ConcertInfo(currentConcert) {
                       placeholder="enter city"
                       value={currentConcert.concerts.city}
                       onChange={handleChange}
-                      disabled
+                      disabled={!editMode}
                     />
                   </Form.Item>
                   <Form.Item
@@ -295,7 +313,7 @@ export function ConcertInfo(currentConcert) {
                       name="background"
                       // type="text"
                       value={currentConcert.concerts.background}
-                      disabled
+                      disabled={!editMode}
                     >
                       <Select.Option value="background-one">
                         style one
