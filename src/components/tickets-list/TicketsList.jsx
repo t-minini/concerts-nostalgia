@@ -67,7 +67,9 @@ export function TicketsList() {
               }`}
               key={`${currentConcert._id}concerts`}
             >
-              <ConcertDetails concerts={currentConcert} />
+              <ConcertDetails
+                concerts={currentConcert}
+              />
               <div className={style['ticket__container-info']}>
                 <p className={style['ticket__container-tour']}>
                   {currentConcert.tour}

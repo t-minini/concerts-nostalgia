@@ -1,23 +1,22 @@
 import { useState, useEffect } from 'react';
 import { api } from '../../api/concerts-nostalgia-api';
 import { TinyColor } from '@ctrl/tinycolor';
-import { useNavigate } from 'react-router-dom';
 import {
   Row,
   Col,
   Flex,
-  Modal,
   Form,
   Input,
+  Modal,
   Select,
   Upload,
-  ConfigProvider,
   Button,
+  ConfigProvider,
 } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 
 export function ConcertDetails(currentConcert) {
-  const navigate = useNavigate();
+  const [concertData, setConcertData] = useState(currentConcert.concerts);
   const [open, setOpen] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [rate, setRate] = useState();
@@ -32,6 +31,10 @@ export function ConcertDetails(currentConcert) {
     setOpen(true);
   };
 
+  useEffect(() => {
+    setConcertData(currentConcert.concerts);
+  }, [currentConcert.concerts]);
+
   const [concert, setConcert] = useState({
     tour: '',
     artist: '',
@@ -43,29 +46,13 @@ export function ConcertDetails(currentConcert) {
     background: 'background-one',
   });
 
-  useEffect(() => {
-    async function fetchConcerts() {
-      try {
-        const response = await api.get(
-          `/concerts/${currentConcert.concerts._id}`
-        );
-        setConcert(response.data);
-        console.log(response);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-
-    fetchConcerts(currentConcert.concerts._id);
-  }, [currentConcert.concerts._id]);
-
   const handleCancel = () => {
     setOpen(false);
     setEditMode(false);
   };
 
   function handleChange(event) {
-    setConcert({ ...concert, [event.target.name]: event.target.value });
+    setConcertData({ ...concertData, [event.target.name]: event.target.value });
   }
 
   function handleEdit() {
@@ -73,31 +60,53 @@ export function ConcertDetails(currentConcert) {
   }
 
   const editAndSaveBtn = editMode ? (
-    <ConfigProvider
-      theme={{
-        components: {
-          Button: {
-            colorPrimary: `linear-gradient(135deg,  ${btnColors.join(', ')})`,
-            colorPrimaryHover: `linear-gradient(135deg, ${getHoverColors(
-              btnColors
-            ).join(', ')})`,
-            colorPrimaryActive: `linear-gradient(135deg, ${getActiveColors(
-              btnColors
-            ).join(', ')})`,
-            lineWidth: 0,
+    <>
+      <ConfigProvider
+        theme={{
+          components: {
+            Button: {
+              defaultColor: '#ffffff',
+              defaultBg: '#212121',
+              defaultBorderColor: '#212121',
+              defaultHoverBg: '#212121',
+              defaultHoverBorderColor: '#212121',
+              defaultHoverColor: '#e34bf0',
+              defaultActiveBg: '#212121',
+              defaultActiveBorderColor: '#212121',
+              defaultActiveColor: '#e34bf0',
+            },
           },
-        },
-      }}
-    >
-      <Button
-        key="submit"
-        type="primary"
-        onClick={handleSubmit}
-        style={{ width: '100px' }}
+        }}
       >
-        Save
-      </Button>
-    </ConfigProvider>
+        <Button onClick={handleDelete} style={{ width: '80px' }}>
+          Delete
+        </Button>
+      </ConfigProvider>
+      <ConfigProvider
+        theme={{
+          components: {
+            Button: {
+              colorPrimary: `linear-gradient(135deg,  ${btnColors.join(', ')})`,
+              colorPrimaryHover: `linear-gradient(135deg, ${getHoverColors(
+                btnColors
+              ).join(', ')})`,
+              colorPrimaryActive: `linear-gradient(135deg, ${getActiveColors(
+                btnColors
+              ).join(', ')})`,
+              lineWidth: 0,
+            },
+          },
+        }}
+      >
+        <Button
+          type="primary"
+          onClick={handleSubmit}
+          style={{ width: '100px' }}
+        >
+          Save
+        </Button>
+      </ConfigProvider>
+    </>
   ) : (
     <ConfigProvider
       theme={{
@@ -115,12 +124,7 @@ export function ConcertDetails(currentConcert) {
         },
       }}
     >
-      <Button
-        key="submit"
-        type="primary"
-        onClick={handleEdit}
-        style={{ width: '100px' }}
-      >
+      <Button type="primary" onClick={handleEdit} style={{ width: '100px' }}>
         Edit
       </Button>
     </ConfigProvider>
@@ -134,11 +138,10 @@ export function ConcertDetails(currentConcert) {
     }, 2000);
     event.preventDefault();
     try {
-      const clone = { ...concert };
+      const clone = { ...concertData };
 
       delete clone._id;
-      await api.put(`/concerts/edit/${currentConcert.concerts._id}`, clone);
-      // navigate('/home');
+      await api.put(`/concerts/edit/${concertData._id}`, clone);
     } catch (error) {
       console.log(error);
     }
@@ -146,21 +149,18 @@ export function ConcertDetails(currentConcert) {
 
   async function handleDelete() {
     try {
-      await api.delete(`/concerts/delete/${currentConcert.concerts._id}`);
+      await api.delete(`/concerts/delete/${concertData._id}`);
     } catch (error) {
       console.log(error);
     }
     setOpen(false);
   }
 
-  function handleRating(event, newValue) {
-    setRate(newValue);
-    setConcert({ ...concert, [event.target.name]: event.target.value });
+  function handleRating(value) {
+    console.log('Selected rating:', value);
+    setRate(value);
+    setConcert({ ...concertData, rating: value });
   }
-
-  // const onDateChange = (date, dateString) => {
-  //   console.log(date, dateString);
-  // };
 
   const formItemLayout = {
     labelCol: {
@@ -218,7 +218,6 @@ export function ConcertDetails(currentConcert) {
         <Modal
           title="concert details"
           width="550px"
-          closeIcon={null}
           open={open}
           onOk={handleSubmit}
           okText="Save"
@@ -226,41 +225,14 @@ export function ConcertDetails(currentConcert) {
           confirmLoading={confirmLoading}
           onCancel={handleCancel}
           centered
-          footer={[
-            <ConfigProvider
-              theme={{
-                components: {
-                  Button: {
-                    defaultBorderColor: '#212121',
-                    defaultHoverColor: '#e34bf0',
-                  },
-                },
-              }}
-            >
-              <Button
-                // key="back"
-                onClick={handleCancel}
-                // ghost
-                // style={{ borderColor: '#212121' }}
-              >
-                Cancel
-              </Button>
-            </ConfigProvider>,
-            editAndSaveBtn,
-          ]}
+          footer={[editAndSaveBtn]}
         >
           <Form
             {...formItemLayout}
             layout={'vertical'}
-            // form={form}
-            // initialValues={{
-            //   layout: formLayout,
-            // }}
-            // onValuesChange={onFormLayoutChange}
             style={{
               backgroundColor: '#212121',
             }}
-            onSubmit={handleSubmit}
           >
             <Flex gap="middle" justify="space-between">
               <Row
@@ -277,7 +249,7 @@ export function ConcertDetails(currentConcert) {
                     <Input
                       name="tour"
                       placeholder="enter tour"
-                      value={currentConcert.concerts.tour}
+                      value={concertData.tour}
                       onChange={handleChange}
                       disabled={!editMode}
                     />
@@ -288,7 +260,7 @@ export function ConcertDetails(currentConcert) {
                     <Input
                       name="location"
                       placeholder="enter location"
-                      value={currentConcert.concerts.location}
+                      value={concertData.location}
                       onChange={handleChange}
                       disabled={!editMode}
                     />
@@ -299,21 +271,20 @@ export function ConcertDetails(currentConcert) {
                     <Input
                       name="country"
                       placeholder="enter country"
-                      value={currentConcert.concerts.country}
+                      value={concertData.country}
                       onChange={handleChange}
                       disabled={!editMode}
                     />
                   </Form.Item>
                   <Form.Item
                     label={<label style={{ color: '#ffffff' }}>rating</label>}
-                    onChange={handleRating}
                   >
                     <Select
                       placeholder="choose a rate"
-                      // onChange={onThemeChange}
                       name="rating"
-                      value={currentConcert.concerts.rating}
+                      value={concertData.rating}
                       disabled={!editMode}
+                      onChange={handleRating}
                     >
                       <Select.Option value={1}>1</Select.Option>
                       <Select.Option value={2}>2</Select.Option>
@@ -336,7 +307,7 @@ export function ConcertDetails(currentConcert) {
                     <Input
                       name="artist"
                       placeholder="enter artist"
-                      value={currentConcert.concerts.artist}
+                      value={concertData.artist}
                       onChange={handleChange}
                       disabled={!editMode}
                     />
@@ -347,7 +318,7 @@ export function ConcertDetails(currentConcert) {
                     <Input
                       name="year"
                       placeholder="enter year"
-                      value={currentConcert.concerts.year}
+                      value={concertData.year}
                       onChange={handleChange}
                       disabled={!editMode}
                     />
@@ -358,7 +329,7 @@ export function ConcertDetails(currentConcert) {
                     <Input
                       name="city"
                       placeholder="enter city"
-                      value={currentConcert.concerts.city}
+                      value={concertData.city}
                       onChange={handleChange}
                       disabled={!editMode}
                     />
@@ -371,11 +342,12 @@ export function ConcertDetails(currentConcert) {
                   >
                     <Select
                       placeholder="choose ticket style"
-                      // onChange={onThemeChange}
                       name="background"
-                      // type="text"
-                      value={currentConcert.concerts.background}
+                      value={concertData.background}
                       disabled={!editMode}
+                      onChange={(value) =>
+                        setConcert({ ...concertData, background: value })
+                      }
                     >
                       <Select.Option value="background-one">
                         style one
