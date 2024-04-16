@@ -245,7 +245,9 @@ export function AddConcert() {
               >
                 <Col span={24}>
                   <Form.Item
-                    label={<label style={{ color: '#ffffff' }}>artist / band</label>}
+                    label={
+                      <label style={{ color: '#ffffff' }}>artist / band</label>
+                    }
                   >
                     <Input
                       name="artist"

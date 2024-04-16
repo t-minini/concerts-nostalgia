@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { api } from '../../api/concerts-nostalgia-api';
+import { TinyColor } from '@ctrl/tinycolor';
 import { useNavigate } from 'react-router-dom';
 import {
   Row,
@@ -21,8 +22,12 @@ export function ConcertDetails(currentConcert) {
   const [editMode, setEditMode] = useState(false);
   const [rate, setRate] = useState();
   const [confirmLoading, setConfirmLoading] = useState(false);
-  // console.log(currentConcert.concerts._id);
 
+  const btnColors = ['#e34bf0', '#7b93e8', '#aae39c', '#fee508', '#fb4747'];
+  const getHoverColors = (colors) =>
+    colors.map((color) => new TinyColor(color).lighten(5).toString());
+  const getActiveColors = (colors) =>
+    colors.map((color) => new TinyColor(color).darken(5).toString());
   const showModal = () => {
     setOpen(true);
   };
@@ -66,6 +71,60 @@ export function ConcertDetails(currentConcert) {
   function handleEdit() {
     setEditMode(true);
   }
+
+  const editAndSaveBtn = editMode ? (
+    <ConfigProvider
+      theme={{
+        components: {
+          Button: {
+            colorPrimary: `linear-gradient(135deg,  ${btnColors.join(', ')})`,
+            colorPrimaryHover: `linear-gradient(135deg, ${getHoverColors(
+              btnColors
+            ).join(', ')})`,
+            colorPrimaryActive: `linear-gradient(135deg, ${getActiveColors(
+              btnColors
+            ).join(', ')})`,
+            lineWidth: 0,
+          },
+        },
+      }}
+    >
+      <Button
+        key="submit"
+        type="primary"
+        onClick={handleSubmit}
+        style={{ width: '100px' }}
+      >
+        Save
+      </Button>
+    </ConfigProvider>
+  ) : (
+    <ConfigProvider
+      theme={{
+        components: {
+          Button: {
+            colorPrimary: `linear-gradient(135deg,  ${btnColors.join(', ')})`,
+            colorPrimaryHover: `linear-gradient(135deg, ${getHoverColors(
+              btnColors
+            ).join(', ')})`,
+            colorPrimaryActive: `linear-gradient(135deg, ${getActiveColors(
+              btnColors
+            ).join(', ')})`,
+            lineWidth: 0,
+          },
+        },
+      }}
+    >
+      <Button
+        key="submit"
+        type="primary"
+        onClick={handleEdit}
+        style={{ width: '100px' }}
+      >
+        Edit
+      </Button>
+    </ConfigProvider>
+  );
 
   async function handleSubmit(event) {
     setConfirmLoading(true);
@@ -153,17 +212,6 @@ export function ConcertDetails(currentConcert) {
               colorPrimaryHover: '#e34bf0',
               colorPrimary: '#e34bf0',
             },
-            Button: {
-              colorPrimary: '#ffffff', // background Create Button
-              primaryColor: '#212121', // font color Create Button
-              colorPrimaryHover: '#e34bf0', //background hover Create Button
-              defaultHoverBg: '#212121', // background hover Cancel Button
-              defaultColor: '#ffffff', // font color Cancel Button
-              defaultHoverColor: '#e34bf0', // font color hover Cancel Button
-              defaultBorderColor: '#212121', // border Cancel Button
-              defaultHoverBorderColor: '#212121',
-              defaultBg: '#212121',
-            },
           },
         }}
       >
@@ -179,12 +227,26 @@ export function ConcertDetails(currentConcert) {
           onCancel={handleCancel}
           centered
           footer={[
-            <Button key="back" onClick={handleCancel}>
-              Cancel
-            </Button>,
-            <Button key="submit" type="primary" onClick={handleEdit}>
-              Edit
-            </Button>,
+            <ConfigProvider
+              theme={{
+                components: {
+                  Button: {
+                    defaultBorderColor: '#212121',
+                    defaultHoverColor: '#e34bf0',
+                  },
+                },
+              }}
+            >
+              <Button
+                // key="back"
+                onClick={handleCancel}
+                // ghost
+                // style={{ borderColor: '#212121' }}
+              >
+                Cancel
+              </Button>
+            </ConfigProvider>,
+            editAndSaveBtn,
           ]}
         >
           <Form
