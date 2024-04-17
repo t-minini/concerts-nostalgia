@@ -72,13 +72,31 @@ export function AddConcert() {
       const response = await api.post('/concerts/add', concert);
 
       console.log(response);
+
       setConcert(response.data);
-      message.success('Concert created successfully!');
+      
+      message.loading({ content: 'Creating concert...', duration: 2 });
+      setTimeout(() => {
+        message.success({
+          content: 'Concert created successfully!',
+          duration: 2,
+        });
+        setOpen(false);
+        setConcert({
+          tour: '',
+          artist: '',
+          year: 0,
+          location: '',
+          city: '',
+          country: '',
+          rating: 0,
+          background: '',
+        });
+      }, 2000);
     } catch (error) {
       console.log('Error creating concert:', error);
       message.error('Failed to create concert!');
     }
-    setOpen(false);
   }
 
   return (
