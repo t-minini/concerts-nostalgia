@@ -17,21 +17,18 @@
 
   --gradient: linear-gradient(
     283deg,
-    #e34bf0 0%,
-    #7b93e8 16%,
-    #aae39c 44%,
-    #fee508 68%,
-    #fb4747 95%
+    #e34bf0 10%,
+    #7b93e8 40%,
+    #aae39c 60%,
+    #fee508 90%
   );
 }
 
 html {
   min-height: 100%;
   width: 100%;
-  /* background-color: red; */
   cursor: default;
   font-size: 62.5%;
-
 }
 
 *,

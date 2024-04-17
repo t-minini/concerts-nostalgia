@@ -1,6 +1,14 @@
 import { useState, useEffect } from 'react';
+import { UploadOutlined } from '@ant-design/icons';
 import { api } from '../../api/concerts-nostalgia-api';
-import { TinyColor } from '@ctrl/tinycolor';
+import {
+  modalTheme,
+  inputTheme,
+  selectTheme,
+  simpleBtnTheme,
+  rainbowBtnTheme,
+  datePickerTheme,
+} from '../../styles/antdesign-themes';
 import {
   Row,
   Col,
@@ -13,23 +21,17 @@ import {
   Button,
   ConfigProvider,
 } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
 
 export function ConcertDetails(currentConcert) {
-  const [concertData, setConcertData] = useState(currentConcert.concerts);
+  const [rate, setRate] = useState();
   const [open, setOpen] = useState(false);
   const [editMode, setEditMode] = useState(false);
-  const [rate, setRate] = useState();
   const [confirmLoading, setConfirmLoading] = useState(false);
+  const [concertData, setConcertData] = useState(currentConcert.concerts);
 
-  const btnColors = ['#e34bf0', '#7b93e8', '#aae39c', '#fee508', '#fb4747'];
-  const getHoverColors = (colors) =>
-    colors.map((color) => new TinyColor(color).lighten(5).toString());
-  const getActiveColors = (colors) =>
-    colors.map((color) => new TinyColor(color).darken(5).toString());
-  const showModal = () => {
+  function showModal() {
     setOpen(true);
-  };
+  }
 
   useEffect(() => {
     setConcertData(currentConcert.concerts);
@@ -46,10 +48,10 @@ export function ConcertDetails(currentConcert) {
     background: 'background-one',
   });
 
-  const handleCancel = () => {
+  function handleCancel() {
     setOpen(false);
     setEditMode(false);
-  };
+  }
 
   function handleChange(event) {
     setConcertData({ ...concertData, [event.target.name]: event.target.value });
@@ -58,77 +60,6 @@ export function ConcertDetails(currentConcert) {
   function handleEdit() {
     setEditMode(true);
   }
-
-  const editAndSaveBtn = editMode ? (
-    <>
-      <ConfigProvider
-        theme={{
-          components: {
-            Button: {
-              defaultColor: '#ffffff',
-              defaultBg: '#212121',
-              defaultBorderColor: '#212121',
-              defaultHoverBg: '#212121',
-              defaultHoverBorderColor: '#212121',
-              defaultHoverColor: '#e34bf0',
-              defaultActiveBg: '#212121',
-              defaultActiveBorderColor: '#212121',
-              defaultActiveColor: '#e34bf0',
-            },
-          },
-        }}
-      >
-        <Button onClick={handleDelete} style={{ width: '80px' }}>
-          Delete
-        </Button>
-      </ConfigProvider>
-      <ConfigProvider
-        theme={{
-          components: {
-            Button: {
-              colorPrimary: `linear-gradient(135deg,  ${btnColors.join(', ')})`,
-              colorPrimaryHover: `linear-gradient(135deg, ${getHoverColors(
-                btnColors
-              ).join(', ')})`,
-              colorPrimaryActive: `linear-gradient(135deg, ${getActiveColors(
-                btnColors
-              ).join(', ')})`,
-              lineWidth: 0,
-            },
-          },
-        }}
-      >
-        <Button
-          type="primary"
-          onClick={handleSubmit}
-          style={{ width: '100px' }}
-        >
-          Save
-        </Button>
-      </ConfigProvider>
-    </>
-  ) : (
-    <ConfigProvider
-      theme={{
-        components: {
-          Button: {
-            colorPrimary: `linear-gradient(135deg,  ${btnColors.join(', ')})`,
-            colorPrimaryHover: `linear-gradient(135deg, ${getHoverColors(
-              btnColors
-            ).join(', ')})`,
-            colorPrimaryActive: `linear-gradient(135deg, ${getActiveColors(
-              btnColors
-            ).join(', ')})`,
-            lineWidth: 0,
-          },
-        },
-      }}
-    >
-      <Button type="primary" onClick={handleEdit} style={{ width: '100px' }}>
-        Edit
-      </Button>
-    </ConfigProvider>
-  );
 
   async function handleSubmit(event) {
     setConfirmLoading(true);
@@ -162,24 +93,31 @@ export function ConcertDetails(currentConcert) {
     setConcert({ ...concertData, rating: value });
   }
 
-  const formItemLayout = {
-    labelCol: {
-      xs: {
-        span: 20,
-      },
-      sm: {
-        span: 20,
-      },
-    },
-    wrapperCol: {
-      xs: {
-        span: 50,
-      },
-      sm: {
-        span: 80,
-      },
-    },
-  };
+  const editAndSaveBtn = editMode ? (
+    <>
+      <ConfigProvider theme={simpleBtnTheme}>
+        <Button onClick={handleDelete} style={{ width: '80px' }}>
+          Delete
+        </Button>
+      </ConfigProvider>
+      <ConfigProvider theme={rainbowBtnTheme}>
+        <Button
+          type="primary"
+          onClick={handleSubmit}
+          style={{ width: '100px' }}
+        >
+          Save
+        </Button>
+      </ConfigProvider>
+    </>
+  ) : (
+    <ConfigProvider theme={rainbowBtnTheme}>
+      <Button type="primary" onClick={handleEdit} style={{ width: '100px' }}>
+        Edit
+      </Button>
+    </ConfigProvider>
+  );
+
   return (
     <>
       <span
@@ -189,29 +127,10 @@ export function ConcertDetails(currentConcert) {
       <ConfigProvider
         theme={{
           components: {
-            Modal: {
-              contentBg: '#212121',
-              headerBg: '#212121',
-              titleFontSize: '40px',
-              titleLineHeight: '1.2',
-              colorIcon: '#ffffff',
-              titleColor: '#ffffff',
-              colorIconHover: '#e34bf0',
-            },
-            Input: {
-              activeBorderColor: '#e34bf0',
-              hoverBorderColor: '#e34bf0',
-              colorBgContainerDisabled: '#ffffff',
-            },
-            Select: {
-              colorPrimaryHover: '#e34bf0',
-              colorPrimary: '#e34bf0',
-              colorBgContainerDisabled: '#ffffff',
-            },
-            DatePicker: {
-              colorPrimaryHover: '#e34bf0',
-              colorPrimary: '#e34bf0',
-            },
+            Modal: { ...modalTheme },
+            Input: { ...inputTheme },
+            Select: { ...selectTheme },
+            DatePicker: { ...datePickerTheme },
           },
         }}
       >
@@ -228,7 +147,6 @@ export function ConcertDetails(currentConcert) {
           footer={[editAndSaveBtn]}
         >
           <Form
-            {...formItemLayout}
             layout={'vertical'}
             style={{
               backgroundColor: '#212121',

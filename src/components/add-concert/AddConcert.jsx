@@ -1,26 +1,32 @@
 import React, { useState } from 'react';
+import { api } from '../../api/concerts-nostalgia-api';
+import { UploadOutlined, PlusOutlined } from '@ant-design/icons';
+import {
+  modalTheme,
+  inputTheme,
+  selectTheme,
+  rainbowBtnTheme,
+  datePickerTheme,
+} from '../../styles/antdesign-themes';
 import {
   Row,
   Col,
   Flex,
-  Modal,
-  Button,
-  Tooltip,
   Form,
   Input,
+  Modal,
+  Button,
   Select,
   Upload,
+  Tooltip,
   message,
   DatePicker,
   ConfigProvider,
 } from 'antd';
-import { UploadOutlined, PlusOutlined } from '@ant-design/icons';
-import { api } from '../../api/concerts-nostalgia-api';
 
 export function AddConcert() {
-  // const navigate = useNavigate();
-  const [open, setOpen] = useState(false);
   const [rate, setRate] = useState();
+  const [open, setOpen] = useState(false);
 
   const [concert, setConcert] = useState({
     tour: '',
@@ -29,33 +35,13 @@ export function AddConcert() {
     location: '',
     city: '',
     country: '',
-    companion: [],
     rating: 1,
     background: 'background-one',
   });
 
-  const formItemLayout = {
-    labelCol: {
-      xs: {
-        span: 20,
-      },
-      sm: {
-        span: 20,
-      },
-    },
-    wrapperCol: {
-      xs: {
-        span: 50,
-      },
-      sm: {
-        span: 80,
-      },
-    },
-  };
-
-  const showModal = () => {
+  function showModal() {
     setOpen(true);
-  };
+  }
 
   function handleChange(event) {
     setConcert({ ...concert, [event.target.name]: event.target.value });
@@ -97,23 +83,11 @@ export function AddConcert() {
 
   return (
     <>
-      <ConfigProvider
-        theme={{
-          components: {
-            Button: {
-              defaultColor: '#212121', // font color Cancel Button
-              defaultHoverColor: '#e34bf0', // font color hover Cancel Button
-              defaultBorderColor: '#ffffff', // border Cancel Button
-              defaultHoverBorderColor: '#e34bf0',
-              defaultBg: '#ffffff',
-              defaultHoverBg: '#212121', // background hover Cancel Button
-            },
-          },
-        }}
-      >
+      <ConfigProvider theme={rainbowBtnTheme}>
         <Tooltip title="New Concert">
           <Button
             onClick={showModal}
+            type="primary"
             shape="circle"
             icon={<PlusOutlined />}
             size="large"
@@ -123,55 +97,37 @@ export function AddConcert() {
       <ConfigProvider
         theme={{
           components: {
-            Modal: {
-              contentBg: '#212121',
-              headerBg: '#212121',
-              titleFontSize: '40px',
-              titleLineHeight: '1.2',
-              colorIcon: '#ffffff',
-              titleColor: '#ffffff',
-              colorIconHover: '#e34bf0',
-            },
-            Input: {
-              activeBorderColor: '#e34bf0',
-              hoverBorderColor: '#e34bf0',
-            },
-            Select: {
-              colorPrimaryHover: '#e34bf0',
-              colorPrimary: '#e34bf0',
-            },
-            DatePicker: {
-              colorPrimaryHover: '#e34bf0',
-              colorPrimary: '#e34bf0',
-            },
-            Button: {
-              colorPrimary: '#ffffff', // background Create Button
-              primaryColor: '#212121', // font color Create Button
-              colorPrimaryHover: '#e34bf0', //background hover Create Button
-              defaultHoverBg: '#212121', // background hover Cancel Button
-              defaultColor: '#ffffff', // font color Cancel Button
-              defaultHoverColor: '#e34bf0', // font color hover Cancel Button
-              defaultBorderColor: '#212121', // border Cancel Button
-              defaultHoverBorderColor: '#212121',
-              defaultBg: '#212121',
-            },
+            Modal: { ...modalTheme },
+            Input: { ...inputTheme },
+            Select: { ...selectTheme },
+            DatePicker: { ...datePickerTheme },
           },
         }}
       >
         <Modal
           title="add new concert"
           width="550px"
-          closeIcon={null}
           open={open}
           onOk={handleSubmit}
           okText="Create"
           onCancel={handleCancel}
           centered
+          footer={[
+            <>
+              <ConfigProvider theme={rainbowBtnTheme}>
+                <Button
+                  type="primary"
+                  onClick={handleSubmit}
+                  style={{ width: '100px' }}
+                >
+                  Create
+                </Button>
+              </ConfigProvider>
+            </>,
+          ]}
         >
           <Form
-            {...formItemLayout}
             layout={'vertical'}
-            // form={form}
             style={{
               backgroundColor: '#212121',
             }}
@@ -219,7 +175,8 @@ export function AddConcert() {
                     name="rating"
                     label={<label style={{ color: '#ffffff' }}>rating</label>}
                     onChange={handleRating}
-                    value={concert.rating}
+                    placeholder="choose a rate"
+                    // value={concert.rating}
                   >
                     <Select
                       placeholder="choose a rate"
@@ -292,7 +249,7 @@ export function AddConcert() {
                     <Select
                       placeholder="choose ticket style"
                       name="background"
-                      value={concert.background}
+                      // value={concert.background}
                       onChange={(value) =>
                         setConcert({ ...concert, background: value })
                       }
