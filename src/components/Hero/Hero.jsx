@@ -7,7 +7,7 @@ export function Hero() {
     <section className={style.hero}>
       <div className={style.hero__container}>
         <h1 className={style.hero__title}>concerts nostalgia</h1>
-        <p className={style.hero__text}>my live concerts journey, revisitedFIX THIS</p>
+        <p className={style.hero__text}>my live concerts journey, revisited</p>
       </div>
       <Link
         to="tickets"
