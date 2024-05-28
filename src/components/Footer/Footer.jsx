@@ -7,7 +7,7 @@ export function Footer() {
         <div className={style['footer__title-container']}>
           <h2 className={style.footer__title}>concerts nostalgia</h2>
           <p className={style.footer__text}>
-            my live concerts journey, revisited
+            your live concerts journey, revisited
           </p>
         </div>
         <div className={style['footer__links-container']}>
